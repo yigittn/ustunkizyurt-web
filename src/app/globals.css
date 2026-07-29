@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+/*
+  Üstün Kız Öğrenci Yurdu — tasarım sistemi
+  Palet: krem zemin + gül kurusu aksan + koyu lacivert tipografi
+  Font: Playfair Display (başlık) + Poppins (gövde)
+*/
+@theme {
+  /* Zemin ve yüzeyler */
+  --color-cream: #fdf8f4;
+  --color-cream-deep: #f9ebe3;
+  --color-surface: #ffffff;
+
+  /* Ana aksan: sıcak gül */
+  --color-rose-50: #fef5f3;
+  --color-rose-100: #fbe3de;
+  --color-rose-200: #f6c6bd;
+  --color-rose-300: #efa093;
+  --color-rose-400: #e5847a;
+  --color-rose-500: #d4685d;
+  --color-rose-600: #b54f44;
+  --color-rose-700: #8e3d34;
+
+  /* İkinci aksan: adaçayı yeşili — tek tonluluğu kırar, güven/tazelik hissi verir */
+  --color-sage-50: #f2f7f1;
+  --color-sage-100: #e0ebde;
+  --color-sage-200: #c2d7c0;
+  --color-sage-300: #9cbc9a;
+  --color-sage-400: #7ca17b;
+  --color-sage-500: #628766;
+  --color-sage-600: #4d6d53;
+  --color-sage-700: #3b5541;
+
+  /* Lacivert metin */
+  --color-ink: #1b2b44;
+  --color-ink-soft: #445570;
+  --color-ink-muted: #7a8899;
+
+  /* Tipografi */
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+
+  /* Yumuşak gölgeler */
+  --shadow-soft: 0 2px 20px -6px rgb(30 42 56 / 0.08);
+  --shadow-card: 0 8px 40px -12px rgb(30 42 56 / 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Seçim rengi */
+::selection {
+  background-color: var(--color-rose-200);
+  color: var(--color-ink);
+}
+
+@layer components {
+  /* Görsellerdeki geniş harf aralıklı serif başlık */
+  .heading-display {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    letter-spacing: 0.06em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  /* Sayfa genişlik sınırı */
+  .container-page {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 80rem;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+}
+
+/* Kullanıcı hareket azaltma tercihini uygula */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
