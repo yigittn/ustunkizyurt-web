@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
 
-import { Logo } from "@/components/brand/logo";
+import { LogoStacked } from "@/components/brand/logo";
 import { FacebookIcon, InstagramIcon } from "@/components/brand/social-icons";
 import { WhatsAppIcon } from "@/components/brand/whatsapp-icon";
 import { LeafDecor } from "@/components/ui/leaf-decor";
@@ -21,8 +21,8 @@ export function Footer() {
       <div className="container-page relative py-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1.2fr]">
           <div>
-            <Logo tone="light" />
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-cream/70">
+            <LogoStacked tone="light" />
+            <p className="mt-7 max-w-sm text-sm leading-relaxed text-cream/70">
               {site.tagline}. Öğrencilerimizin kendilerini güvende, huzurlu ve
               evlerinde hissedebilecekleri bir ortam sunuyoruz.
             </p>

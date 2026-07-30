@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Poppins } from "next/font/google";
+import { Dancing_Script, Playfair_Display, Poppins } from "next/font/google";
 
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
@@ -18,6 +18,14 @@ const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin", "latin-ext"],
   weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+// Yalnızca logo sloganında kullanılıyor
+const dancing = Dancing_Script({
+  variable: "--font-dancing",
+  subsets: ["latin", "latin-ext"],
+  weight: ["600"],
   display: "swap",
 });
 
@@ -54,7 +62,7 @@ export default function RootLayout({
   return (
     <html
       lang="tr"
-      className={`${playfair.variable} ${poppins.variable} h-full antialiased`}
+      className={`${playfair.variable} ${poppins.variable} ${dancing.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-cream">
         <Navbar />

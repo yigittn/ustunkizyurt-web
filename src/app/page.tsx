@@ -28,12 +28,12 @@ export default function HomePage() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-cream">
+    <section className="relative flex min-h-[calc(100svh-var(--header-h))] items-center overflow-hidden bg-cream">
       <BlobDecor className="absolute -right-40 -top-32 size-[36rem] text-rose-100" />
       <BlobDecor className="absolute -bottom-56 -left-56 size-[38rem] text-sage-100/60" />
       <LeafDecor className="absolute right-4 top-24 hidden h-80 w-72 text-sage-300/50 lg:block" />
 
-      <div className="container-page relative grid items-center gap-14 py-16 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:py-24">
+      <div className="container-page relative grid items-center gap-12 py-10 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:py-12">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-sage-300 bg-sage-50 px-4 py-1.5 text-xs font-medium tracking-wide text-sage-700">
             <ShieldCheck className="size-3.5" />
@@ -75,17 +75,17 @@ function Hero() {
               alt="Yurt binası dış görünüm"
               caption="Yurt binası"
               priority
-              className="col-span-2 aspect-[16/10]"
+              className="col-span-2 aspect-[16/9]"
             />
             <PhotoFrame
               alt="Öğrenci odası"
               caption="Odalarımız"
-              className="aspect-square"
+              className="aspect-[4/3]"
             />
             <PhotoFrame
               alt="Etüt salonu"
               caption="Etüt salonu"
-              className="aspect-square"
+              className="aspect-[4/3]"
             />
           </div>
 
@@ -174,7 +174,7 @@ function IntroSection() {
               bir konaklama yeri gibi değil, bir yaşam alanı gibi kurguladık.
             </p>
             <p>
-              Kartlı giriş sistemi, 7/24 kamera kaydı ve her saat görevli
+              7/24 kamera kaydı ve her saat görevli
               personelimizle güvenliğinizi; ferah odalarımız, etüt salonumuz ve
               ortak alanlarımızla da konforunuzu güvence altına alıyoruz.
             </p>

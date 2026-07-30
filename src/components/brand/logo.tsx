@@ -1,57 +1,202 @@
 import Link from "next/link";
 
-import { HouseHeart } from "@/components/brand/house-heart";
 import { cn } from "@/lib/utils";
 
 /**
- * Logo kilidi: ev-kalp sembolü + "üstün" kelime markası +
- * "Kız Öğrenci Yurdu" alt satırı.
+ * Marka sembolü: wordmark'ın üzerine kemer gibi oturan çatı ve
+ * çatının altındaki dört bölmeli pencere.
+ */
+export function LogoMark({
+  className,
+  windowClassName,
+}: {
+  /** Yalnızca genişlik verin; yükseklik en-boy oranından gelir. */
+  className?: string;
+  /** Pencere karelerinin rengi (varsayılan: gül aksan) */
+  windowClassName?: string;
+}) {
+  return (
+    <svg
+      viewBox="0 0 120 48"
+      fill="none"
+      aria-hidden="true"
+      className={cn("h-auto w-14", className)}
+    >
+      <path
+        d="M8 44 L60 6 L112 44"
+        stroke="currentColor"
+        strokeWidth="5.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <g className={cn("text-rose-400", windowClassName)} fill="currentColor">
+        <rect x="49.75" y="17" width="9" height="9" rx="1.2" />
+        <rect x="61.25" y="17" width="9" height="9" rx="1.2" />
+        <rect x="49.75" y="28.5" width="9" height="9" rx="1.2" />
+        <rect x="61.25" y="28.5" width="9" height="9" rx="1.2" />
+      </g>
+    </svg>
+  );
+}
+
+type Tone = "dark" | "light";
+
+const toneStyles: Record<
+  Tone,
+  {
+    mark: string;
+    window: string;
+    wordmark: string;
+    subline: string;
+    rule: string;
+    dot: string;
+    tagline: string;
+  }
+> = {
+  dark: {
+    mark: "text-ink",
+    window: "text-rose-400",
+    wordmark: "text-ink",
+    subline: "text-ink-muted",
+    rule: "bg-rose-300",
+    dot: "bg-rose-500",
+    tagline: "text-rose-600",
+  },
+  light: {
+    mark: "text-cream",
+    window: "text-rose-300",
+    wordmark: "text-cream",
+    subline: "text-cream/60",
+    rule: "bg-cream/25",
+    dot: "bg-rose-300",
+    tagline: "text-rose-200",
+  },
+};
+
+/**
+ * Navbar için kompakt logo kilidi: çatı + ÜSTÜN + alt satır.
+ * Açık zeminde `dark`, koyu zeminde `light` tonu kullanılır.
  */
 export function Logo({
   className,
   tone = "dark",
 }: {
   className?: string;
-  /** Açık zeminde "dark", koyu zeminde "light" kullanılır. */
-  tone?: "dark" | "light";
+  tone?: Tone;
 }) {
-  const isLight = tone === "light";
+  const t = toneStyles[tone];
 
   return (
     <Link
       href="/"
-      aria-label={`Üstün Kız Öğrenci Yurdu — ana sayfa`}
-      className={cn("group inline-flex items-center gap-3", className)}
+      aria-label="Üstün Kız Öğrenci Yurdu — ana sayfa"
+      className={cn(
+        "group inline-flex flex-col items-center transition-opacity hover:opacity-85",
+        className,
+      )}
     >
+      <LogoMark
+        className={cn("w-[3.4rem] sm:w-[3.8rem]", t.mark)}
+        windowClassName={t.window}
+      />
+
+      {/* Çatının ayakları Ü'nün noktalarına binmesin diye boşluk bırakıldı */}
       <span
         className={cn(
-          "flex size-11 shrink-0 items-center justify-center rounded-full transition-colors",
-          isLight
-            ? "bg-white/10 text-rose-200 group-hover:bg-white/15"
-            : "bg-rose-100 text-rose-600 group-hover:bg-rose-200",
+          "mt-1 whitespace-nowrap pl-[0.3em] text-[1.35rem] font-bold uppercase leading-none tracking-[0.3em] sm:text-2xl",
+          t.wordmark,
         )}
       >
-        <HouseHeart className="size-6" />
+        Üstün
       </span>
 
-      <span className="flex flex-col leading-none">
-        <span
-          className={cn(
-            "font-display text-2xl lowercase tracking-[0.28em] sm:text-[1.7rem]",
-            isLight ? "text-white" : "text-ink",
-          )}
-        >
-          üstün
-        </span>
-        <span
-          className={cn(
-            "mt-1.5 text-[0.62rem] font-medium uppercase tracking-[0.22em] sm:text-[0.68rem]",
-            isLight ? "text-rose-100/80" : "text-ink-muted",
-          )}
-        >
-          Kız Öğrenci Yurdu
-        </span>
+      <span
+        className={cn(
+          "mt-2 whitespace-nowrap pl-[0.24em] text-[0.55rem] font-medium uppercase leading-none tracking-[0.24em] sm:text-[0.6rem]",
+          t.subline,
+        )}
+      >
+        Kız Öğrenci Yurdu
       </span>
+    </Link>
+  );
+}
+
+/**
+ * Tam logo kilidi: kompakt sürümün altına ince ayraç ve el yazısı slogan
+ * ekler. Footer ve büyük kullanımlar için.
+ */
+export function LogoStacked({
+  className,
+  tone = "dark",
+  tagline = "Evinizden uzakta, evinizdeki huzur…",
+  href = "/",
+}: {
+  className?: string;
+  tone?: Tone;
+  tagline?: string;
+  /** Boş verilirse bağlantı değil, düz blok olarak render edilir. */
+  href?: string | null;
+}) {
+  const t = toneStyles[tone];
+
+  const content = (
+    <>
+      <LogoMark
+        className={cn("w-[5.5rem] sm:w-24", t.mark)}
+        windowClassName={t.window}
+      />
+
+      <span
+        className={cn(
+          "mt-2 whitespace-nowrap pl-[0.34em] text-[2rem] font-bold uppercase leading-none tracking-[0.34em] sm:text-[2.35rem]",
+          t.wordmark,
+        )}
+      >
+        Üstün
+      </span>
+
+      <span
+        className={cn(
+          "mt-3.5 whitespace-nowrap pl-[0.3em] text-[0.7rem] font-medium uppercase leading-none tracking-[0.3em] sm:text-xs",
+          t.subline,
+        )}
+      >
+        Kız Öğrenci Yurdu
+      </span>
+
+      <span className="mt-4 flex w-full max-w-[15rem] items-center gap-2">
+        <span className={cn("h-px flex-1", t.rule)} />
+        <span className={cn("size-1.5 rounded-full", t.dot)} />
+        <span className={cn("h-px flex-1", t.rule)} />
+      </span>
+
+      {tagline ? (
+        <span
+          className={cn(
+            "mt-3 text-center font-script text-xl leading-snug sm:text-2xl",
+            t.tagline,
+          )}
+        >
+          {tagline}
+        </span>
+      ) : null}
+    </>
+  );
+
+  const wrapper = cn("inline-flex flex-col items-center", className);
+
+  if (!href) {
+    return <div className={wrapper}>{content}</div>;
+  }
+
+  return (
+    <Link
+      href={href}
+      aria-label="Üstün Kız Öğrenci Yurdu — ana sayfa"
+      className={cn(wrapper, "transition-opacity hover:opacity-85")}
+    >
+      {content}
     </Link>
   );
 }

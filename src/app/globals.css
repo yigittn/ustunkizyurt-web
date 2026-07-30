@@ -39,6 +39,8 @@
   /* Tipografi */
   --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  /* Yalnızca logo sloganı için el yazısı */
+  --font-script: var(--font-dancing), "Segoe Script", cursive;
 
   /* Yumuşak gölgeler */
   --shadow-soft: 0 2px 20px -6px rgb(30 42 56 / 0.08);
@@ -47,6 +49,29 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+/*
+  Sabit başlığın toplam yüksekliği. Hero bölümü, ilk ekranda tam olarak
+  başlığın altını doldursun diye bu değeri kullanır — böylece sonraki
+  bölümden ekranın altında yarım bir şerit görünmez.
+  Mobil: yalnızca ana bar (h-20) + 1px alt kenarlık.
+  md+: üst şerit (h-11) eklenir, iki kenarlık olur. lg+: ana bar h-24.
+*/
+:root {
+  --header-h: calc(5rem + 1px);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-h: calc(7.75rem + 2px);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-h: calc(8.75rem + 2px);
+  }
 }
 
 body {
