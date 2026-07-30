@@ -3,36 +3,56 @@
 import { useState } from "react";
 
 import { PhotoFrame } from "@/components/ui/photo-frame";
-import { galleryCategories, galleryItems } from "@/lib/gallery";
+import type { Dictionary } from "@/i18n";
+import {
+  galleryCategories,
+  galleryItems,
+  type GalleryCategoryId,
+} from "@/lib/gallery";
 import { cn } from "@/lib/utils";
 
-const ALL = "Tümü";
+const ALL = "all" as const;
 
-export function GalleryGrid() {
-  const [active, setActive] = useState<string>(ALL);
+type Filter = typeof ALL | GalleryCategoryId;
+
+export function GalleryGrid({
+  gallery,
+  photoLabel,
+  categoriesLabel,
+}: {
+  gallery: Dictionary["gallery"];
+  /** Yer tutucudaki "Fotoğraf" etiketi */
+  photoLabel: string;
+  categoriesLabel: string;
+}) {
+  const [active, setActive] = useState<Filter>(ALL);
 
   const visible =
     active === ALL
       ? galleryItems
       : galleryItems.filter((item) => item.category === active);
 
+  const filters: Filter[] = [ALL, ...galleryCategories];
+
   return (
     <div>
       <div
         role="tablist"
-        aria-label="Galeri kategorileri"
+        aria-label={categoriesLabel}
         className="flex flex-wrap justify-center gap-2"
       >
-        {[ALL, ...galleryCategories].map((category) => {
-          const selected = active === category;
+        {filters.map((filter) => {
+          const selected = active === filter;
+          const label =
+            filter === ALL ? gallery.all : gallery.categories[filter];
 
           return (
             <button
-              key={category}
+              key={filter}
               type="button"
               role="tab"
               aria-selected={selected}
-              onClick={() => setActive(category)}
+              onClick={() => setActive(filter)}
               className={cn(
                 "rounded-full border px-5 py-2 text-sm font-medium transition-colors",
                 selected
@@ -40,7 +60,7 @@ export function GalleryGrid() {
                   : "border-ink/12 text-ink-soft hover:border-rose-300 hover:text-rose-700",
               )}
             >
-              {category}
+              {label}
             </button>
           );
         })}
@@ -49,10 +69,10 @@ export function GalleryGrid() {
       <div className="mt-12 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
         {visible.map((item) => (
           <PhotoFrame
-            key={item.alt}
+            key={item.id}
             src={item.src}
-            alt={item.alt}
-            caption={item.alt}
+            alt={gallery.items[item.id]}
+            photoLabel={photoLabel}
             className="aspect-[4/5]"
           />
         ))}

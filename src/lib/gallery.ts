@@ -1,37 +1,40 @@
-export type GalleryCategory = "Odalar" | "Ortak Alanlar" | "Bina";
+import type { Dictionary } from "@/i18n";
+
+export type GalleryCategoryId = keyof Dictionary["gallery"]["categories"];
+export type GalleryItemId = keyof Dictionary["gallery"]["items"];
+
+export const galleryCategories: GalleryCategoryId[] = [
+  "rooms",
+  "common",
+  "building",
+];
 
 export type GalleryItem = {
+  id: GalleryItemId;
+  category: GalleryCategoryId;
   /** public/galeri/ altındaki dosya yolu; eklenene kadar yer tutucu gösterilir. */
   src?: string;
-  alt: string;
-  category: GalleryCategory;
 };
-
-export const galleryCategories: GalleryCategory[] = [
-  "Odalar",
-  "Ortak Alanlar",
-  "Bina",
-];
 
 /**
  * Galeri içeriği. Gerçek fotoğraflar `public/galeri/` altına eklendikçe
- * her kaydın `src` alanı doldurulur.
+ * her kaydın `src` alanı doldurulur. Başlıklar sözlükten gelir.
  */
 export const galleryItems: GalleryItem[] = [
-  { alt: "Tek kişilik oda", category: "Odalar" },
-  { alt: "İki kişilik oda", category: "Odalar" },
-  { alt: "Üç kişilik oda", category: "Odalar" },
-  { alt: "Oda çalışma masası", category: "Odalar" },
-  { alt: "Oda dolapları", category: "Odalar" },
-  { alt: "Banyo", category: "Odalar" },
-  { alt: "Etüt salonu", category: "Ortak Alanlar" },
-  { alt: "Dinlenme salonu", category: "Ortak Alanlar" },
-  { alt: "Ziyaretçi odası", category: "Ortak Alanlar" },
-  { alt: "Çamaşırhane", category: "Ortak Alanlar" },
-  { alt: "Ütü alanı", category: "Ortak Alanlar" },
-  { alt: "Mutfak", category: "Ortak Alanlar" },
-  { alt: "Yurt binası dış görünüm", category: "Bina" },
-  { alt: "Yurt girişi", category: "Bina" },
-  { alt: "Koridor", category: "Bina" },
-  { alt: "Bahçe", category: "Bina" },
+  { id: "singleRoom", category: "rooms" },
+  { id: "doubleRoom", category: "rooms" },
+  { id: "tripleRoom", category: "rooms" },
+  { id: "deskArea", category: "rooms" },
+  { id: "wardrobes", category: "rooms" },
+  { id: "bathroom", category: "rooms" },
+  { id: "studyHall", category: "common" },
+  { id: "lounge", category: "common" },
+  { id: "guestRoom", category: "common" },
+  { id: "laundry", category: "common" },
+  { id: "ironing", category: "common" },
+  { id: "kitchen", category: "common" },
+  { id: "exterior", category: "building" },
+  { id: "entrance", category: "building" },
+  { id: "corridor", category: "building" },
+  { id: "garden", category: "building" },
 ];

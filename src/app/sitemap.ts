@@ -1,14 +1,25 @@
 import type { MetadataRoute } from "next";
 
-import { navigation, site } from "@/lib/site";
+import { defaultLocale, localePath, locales, pageKeys } from "@/i18n/config";
+import { site } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
+  const absolute = (path: string) => new URL(path, site.url).toString();
 
-  return navigation.map((item) => ({
-    url: new URL(item.href, site.url).toString(),
-    lastModified,
-    changeFrequency: "monthly",
-    priority: item.href === "/" ? 1 : 0.8,
-  }));
+  return locales.flatMap((locale) =>
+    pageKeys.map((key) => ({
+      url: absolute(localePath(locale, key)),
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: key === "home" ? 1 : 0.8,
+      // Arama motorlarına iki dilli sürümleri eşleştirir
+      alternates: {
+        languages: Object.fromEntries([
+          ...locales.map((item) => [item, absolute(localePath(item, key))]),
+          ["x-default", absolute(localePath(defaultLocale, key))],
+        ]),
+      },
+    })),
+  );
 }

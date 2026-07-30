@@ -6,11 +6,14 @@ import { LeafDecor } from "@/components/ui/leaf-decor";
 import { contact } from "@/lib/site";
 
 export function CtaSection({
-  title = "Yerinizi ayırtmak için bize ulaşın",
-  text = "Odalarımızı gezmek, fiyatlarımızı öğrenmek veya aklınıza takılan her soru için bir telefon kadar yakınız.",
+  title,
+  text,
+  whatsappLabel,
 }: {
-  title?: string;
-  text?: string;
+  title: string;
+  text: string;
+  /** "WhatsApp'tan yazın" */
+  whatsappLabel: string;
 }) {
   return (
     <section className="relative overflow-hidden bg-ink py-20 text-cream lg:py-24">
@@ -38,7 +41,7 @@ export function CtaSection({
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <Button href={contact.whatsappHref} size="lg">
             <WhatsAppIcon className="size-5" />
-            WhatsApp&apos;tan yazın
+            {whatsappLabel}
           </Button>
           <Button
             href={contact.phoneHref}

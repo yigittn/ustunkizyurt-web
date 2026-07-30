@@ -1,10 +1,10 @@
 import { HeartHandshake, Telescope } from "lucide-react";
 
 import { BlobDecor } from "@/components/ui/leaf-decor";
-import { mission, vision, type ValueCard } from "@/lib/content";
+import type { Dictionary } from "@/i18n";
 import { cn } from "@/lib/utils";
 
-export function ValueCards() {
+export function ValueCards({ d }: { d: Dictionary }) {
   return (
     <section className="relative overflow-hidden bg-cream-deep py-20 lg:py-28">
       <BlobDecor className="absolute -left-24 -top-24 size-96 text-rose-200/45" />
@@ -12,12 +12,14 @@ export function ValueCards() {
 
       <div className="container-page relative grid gap-8 lg:grid-cols-2 lg:gap-10">
         <ValuePanel
-          card={vision}
+          title={d.vision.title}
+          body={d.vision.body}
           icon={<Telescope className="size-8" />}
           tone="rose"
         />
         <ValuePanel
-          card={mission}
+          title={d.mission.title}
+          body={d.mission.body}
           icon={<HeartHandshake className="size-8" />}
           tone="sage"
         />
@@ -43,11 +45,13 @@ const tones = {
 
 /** Görsellerdeki ikon madalyonlu, ince çerçeveli beyaz kart. */
 function ValuePanel({
-  card,
+  title,
+  body,
   icon,
   tone,
 }: {
-  card: ValueCard;
+  title: string;
+  body: string;
   icon: React.ReactNode;
   tone: keyof typeof tones;
 }) {
@@ -64,9 +68,14 @@ function ValuePanel({
         {icon}
       </span>
 
-      <div className={cn("rounded-[1.5rem] border px-4 py-8 text-center sm:px-8", t.frame)}>
+      <div
+        className={cn(
+          "rounded-[1.5rem] border px-4 py-8 text-center sm:px-8",
+          t.frame,
+        )}
+      >
         <h2 className="heading-display text-2xl uppercase sm:text-3xl">
-          {card.title}
+          {title}
         </h2>
 
         <div className="mx-auto mt-5 flex w-40 items-center gap-2">
@@ -76,7 +85,7 @@ function ValuePanel({
         </div>
 
         <p className="mt-6 text-pretty text-base leading-relaxed text-ink-soft sm:text-lg">
-          {card.body}
+          {body}
         </p>
       </div>
     </article>

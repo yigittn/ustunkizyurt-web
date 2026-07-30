@@ -47,16 +47,21 @@
   --shadow-card: 0 8px 40px -12px rgb(30 42 56 / 0.12);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/*
+  `html { scroll-behavior: smooth }` BİLEREK kullanılmıyor.
+  Next.js App Router sayfa geçişinde tepeye almayı senkron bir
+  scroll çağrısıyla yapıyor; smooth açıkken bu bir animasyona dönüşüp
+  yarıda kalıyor ve yeni sayfa ortasından açılıyordu.
+  Sayfa içi çapa bağlantılarında yumuşak kaydırma istenirse
+  ilgili öğeye `scroll-smooth` sınıfı verilebilir.
+*/
 
 /*
   Sabit başlığın toplam yüksekliği. Hero bölümü, ilk ekranda tam olarak
   başlığın altını doldursun diye bu değeri kullanır — böylece sonraki
   bölümden ekranın altında yarım bir şerit görünmez.
   Mobil: yalnızca ana bar (h-20) + 1px alt kenarlık.
-  md+: üst şerit (h-11) eklenir, iki kenarlık olur. lg+: ana bar h-24.
+  md+: üst şerit (h-12) eklenir, iki kenarlık olur. lg+: ana bar h-24.
 */
 :root {
   --header-h: calc(5rem + 1px);
@@ -64,14 +69,19 @@ html {
 
 @media (min-width: 768px) {
   :root {
-    --header-h: calc(7.75rem + 2px);
+    --header-h: calc(8rem + 2px);
   }
 }
 
 @media (min-width: 1024px) {
   :root {
-    --header-h: calc(8.75rem + 2px);
+    --header-h: calc(9rem + 2px);
   }
+}
+
+/* Çapa bağlantısıyla gelindiğinde bölüm sabit başlığın altında kalmasın */
+section[id] {
+  scroll-margin-top: calc(var(--header-h) + 1rem);
 }
 
 body {

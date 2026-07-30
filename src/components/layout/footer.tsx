@@ -2,12 +2,15 @@ import Link from "next/link";
 import { Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
 
 import { LogoStacked } from "@/components/brand/logo";
-import { FacebookIcon, InstagramIcon } from "@/components/brand/social-icons";
+import { InstagramIcon } from "@/components/brand/social-icons";
 import { WhatsAppIcon } from "@/components/brand/whatsapp-icon";
+import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { LeafDecor } from "@/components/ui/leaf-decor";
-import { contact, navigation, site, social } from "@/lib/site";
+import type { Dictionary } from "@/i18n";
+import { localePath, pageKeys, type Locale } from "@/i18n/config";
+import { contact, social } from "@/lib/site";
 
-export function Footer() {
+export function Footer({ locale, d }: { locale: Locale; d: Dictionary }) {
   const year = new Date().getFullYear();
 
   return (
@@ -21,41 +24,54 @@ export function Footer() {
       <div className="container-page relative py-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1.2fr]">
           <div>
-            <LogoStacked tone="light" />
+            <LogoStacked
+              tone="light"
+              href={localePath(locale, "home")}
+              label={d.a11y.homeLink}
+              subline={d.common.logoSubline}
+              tagline={d.common.logoTagline}
+            />
             <p className="mt-7 max-w-sm text-sm leading-relaxed text-cream/70">
-              {site.tagline}. Öğrencilerimizin kendilerini güvende, huzurlu ve
-              evlerinde hissedebilecekleri bir ortam sunuyoruz.
+              {d.common.tagline}
             </p>
 
             <div className="mt-6 inline-flex items-center gap-2.5 rounded-full border border-cream/15 bg-cream/5 px-4 py-2">
               <ShieldCheck className="size-4 text-rose-300" />
               <span className="text-xs font-medium tracking-wide text-cream/80">
-                T.C. Gençlik ve Spor Bakanlığı denetimindedir
+                {d.common.ministry}
               </span>
             </div>
           </div>
 
-          <nav aria-label="Alt menü">
+          <nav aria-label={d.a11y.footerMenu}>
             <h2 className="font-display text-lg tracking-widest text-cream">
-              Menü
+              {d.common.menu}
             </h2>
             <ul className="mt-6 flex flex-col gap-3">
-              {navigation.map((item) => (
-                <li key={item.href}>
+              {pageKeys.map((key) => (
+                <li key={key}>
                   <Link
-                    href={item.href}
+                    href={localePath(locale, key)}
                     className="text-sm text-cream/70 transition-colors hover:text-rose-200"
                   >
-                    {item.label}
+                    {d.nav[key]}
                   </Link>
                 </li>
               ))}
             </ul>
+
+            <div className="mt-8">
+              <LanguageSwitcher
+                locale={locale}
+                label={d.a11y.languageSwitcher}
+                tone="light"
+              />
+            </div>
           </nav>
 
           <div>
             <h2 className="font-display text-lg tracking-widest text-cream">
-              İletişim
+              {d.common.contact}
             </h2>
             <ul className="mt-6 flex flex-col gap-4 text-sm">
               <li>
@@ -101,9 +117,6 @@ export function Footer() {
             </ul>
 
             <div className="mt-6 flex items-center gap-2">
-              <FooterSocial href={social.facebook} label="Facebook">
-                <FacebookIcon className="size-4" />
-              </FooterSocial>
               <FooterSocial href={social.instagram} label="Instagram">
                 <InstagramIcon className="size-4" />
               </FooterSocial>
@@ -113,7 +126,7 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col items-center gap-2 border-t border-cream/10 pt-8 text-center text-xs text-cream/50 sm:flex-row sm:justify-between sm:text-left">
           <p>
-            © {year} {site.name}. Tüm hakları saklıdır.
+            © {year} {d.common.brandName}. {d.common.rights}
           </p>
           <p>{contact.addressShort}</p>
         </div>

@@ -1,54 +1,82 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 
 import { WhatsAppIcon } from "@/components/brand/whatsapp-icon";
 import { PageHeader } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { contact, site } from "@/lib/site";
+import { getDictionary, isLocale, locales, type Dictionary } from "@/i18n";
+import { alternatesFor } from "@/lib/metadata";
+import { contact } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "İletişim",
-  description: `${site.name} iletişim bilgileri: ${contact.address}. Telefon ${contact.phone}, WhatsApp ${contact.whatsapp}.`,
-};
+export function generateStaticParams() {
+  return locales.map((lang) => ({ lang }));
+}
 
-const channels = [
-  {
-    icon: MapPin,
-    title: "Adres",
-    lines: [contact.address],
-    href: contact.mapsHref,
-    linkLabel: "Haritada aç",
-  },
-  {
-    icon: Phone,
-    title: "Telefon",
-    lines: [contact.phone],
-    href: contact.phoneHref,
-    linkLabel: "Hemen ara",
-  },
-  {
-    icon: WhatsAppIcon,
-    title: "WhatsApp",
-    lines: [contact.whatsapp],
-    href: contact.whatsappHref,
-    linkLabel: "Mesaj gönder",
-  },
-  {
-    icon: Mail,
-    title: "E-posta",
-    lines: [contact.email],
-    href: `mailto:${contact.email}`,
-    linkLabel: "E-posta yaz",
-  },
-];
+export async function generateMetadata({
+  params,
+}: PageProps<"/[lang]/iletisim">): Promise<Metadata> {
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
+  const d = getDictionary(lang);
 
-export default function IletisimPage() {
+  return {
+    title: d.contact.title,
+    description: `${d.contact.description} ${contact.address}`,
+    alternates: alternatesFor(lang, "contact"),
+  };
+}
+
+function buildChannels(d: Dictionary) {
+  return [
+    {
+      icon: MapPin,
+      title: d.common.address,
+      line: contact.address,
+      href: contact.mapsHref,
+      linkLabel: d.contact.openMap,
+    },
+    {
+      icon: Phone,
+      title: d.common.phone,
+      line: contact.phone,
+      href: contact.phoneHref,
+      linkLabel: d.contact.callNow,
+    },
+    {
+      icon: WhatsAppIcon,
+      title: d.common.whatsapp,
+      line: contact.whatsapp,
+      href: contact.whatsappHref,
+      linkLabel: d.contact.sendMessage,
+    },
+    {
+      icon: Mail,
+      title: d.common.email,
+      line: contact.email,
+      href: `mailto:${contact.email}`,
+      linkLabel: d.contact.writeEmail,
+    },
+  ];
+}
+
+export default async function ContactPage({
+  params,
+}: PageProps<"/[lang]/iletisim">) {
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
+  const d = getDictionary(lang);
+  const channels = buildChannels(d);
+
   return (
     <>
       <PageHeader
-        title="İletişim"
-        description="Sorularınız, oda rezervasyonu ve yurt gezisi randevusu için bize ulaşın."
+        locale={lang}
+        title={d.contact.title}
+        description={d.contact.description}
+        homeLabel={d.nav.home}
+        breadcrumbLabel={d.a11y.breadcrumb}
       />
 
       <section className="bg-cream py-20 lg:py-24">
@@ -65,14 +93,9 @@ export default function IletisimPage() {
                 <h2 className="mt-5 text-sm font-semibold uppercase tracking-[0.12em] text-ink">
                   {channel.title}
                 </h2>
-                {channel.lines.map((line) => (
-                  <p
-                    key={line}
-                    className="mt-3 text-sm leading-relaxed text-ink-soft"
-                  >
-                    {line}
-                  </p>
-                ))}
+                <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+                  {channel.line}
+                </p>
                 <a
                   href={channel.href}
                   {...(channel.href.startsWith("http")
@@ -92,11 +115,10 @@ export default function IletisimPage() {
             </span>
             <div>
               <h2 className="text-sm font-semibold uppercase tracking-[0.12em] text-ink">
-                Ziyaret saatleri
+                {d.contact.hoursTitle}
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                Yurdumuzu her gün 09:00 – 20:00 arasında gezebilirsiniz.
-                Gelmeden önce arayarak randevu almanızı öneririz.
+                {d.contact.hoursText}
               </p>
             </div>
           </div>
@@ -106,14 +128,14 @@ export default function IletisimPage() {
       <section className="bg-cream-deep py-20 lg:py-24">
         <div className="container-page">
           <SectionHeading
-            title="Bizi bulun"
-            subtitle="Görükle merkezde, Uludağ Üniversitesi kampüsüne yürüme mesafesinde."
+            title={d.contact.mapTitle}
+            subtitle={d.contact.mapSubtitle}
           />
 
           <div className="mt-12 overflow-hidden rounded-3xl shadow-card ring-1 ring-rose-200/70">
             <iframe
-              title={`${site.name} konumu`}
-              src="https://maps.google.com/maps?q=G%C3%B6r%C3%BCkle%20%C3%9C%C3%A7oluk%20Cd.%20No%3A39%2016285%20Nil%C3%BCfer%20Bursa&z=16&output=embed"
+              title={d.a11y.mapTitle}
+              src={contact.mapEmbedSrc}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               className="h-[26rem] w-full border-0"
@@ -123,7 +145,7 @@ export default function IletisimPage() {
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <Button href={contact.whatsappHref} size="lg">
               <WhatsAppIcon className="size-5" />
-              WhatsApp&apos;tan yazın
+              {d.cta.whatsapp}
             </Button>
             <Button href={contact.phoneHref} size="lg" variant="outline">
               <Phone className="size-4" />

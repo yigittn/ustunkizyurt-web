@@ -6,14 +6,51 @@ import { useEffect, useState } from "react";
 import { MapPin, Menu, Phone, X } from "lucide-react";
 
 import { Logo } from "@/components/brand/logo";
-import { FacebookIcon, InstagramIcon } from "@/components/brand/social-icons";
+import { InstagramIcon } from "@/components/brand/social-icons";
 import { WhatsAppIcon } from "@/components/brand/whatsapp-icon";
-import { contact, navigation, social } from "@/lib/site";
+import {
+  LanguageSwitcher,
+  LanguageSwitcherInline,
+} from "@/components/layout/language-switcher";
+import type { Dictionary } from "@/i18n";
+import {
+  localePath,
+  pageKeys,
+  stripLocale,
+  type Locale,
+  type PageKey,
+} from "@/i18n/config";
+import { contact, social } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
-export function Navbar() {
+type NavbarProps = {
+  locale: Locale;
+  nav: Dictionary["nav"];
+  a11y: Dictionary["a11y"];
+  logoSubline: string;
+  languageLabel: string;
+};
+
+export function Navbar({
+  locale,
+  nav,
+  a11y,
+  logoSubline,
+  languageLabel,
+}: NavbarProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [lastPathname, setLastPathname] = useState(pathname);
+
+  // Dil önekinden arındırılmış yol — aktif bağlantıyı bulmak için
+  const { rest } = stripLocale(pathname);
+
+  // Sayfa değişince mobil menüyü kapat. Effect yerine render sırasında
+  // ayarlanır; böylece fazladan bir render turu oluşmaz.
+  if (pathname !== lastPathname) {
+    setLastPathname(pathname);
+    setOpen(false);
+  }
 
   // Menü açıkken arka planın kaymasını engelle
   useEffect(() => {
@@ -23,13 +60,27 @@ export function Navbar() {
     };
   }, [open]);
 
+  const items = pageKeys.map((key) => ({
+    key,
+    label: nav[key],
+    href: localePath(locale, key),
+    active: isActive(key, rest),
+  }));
+
   return (
     <header className="sticky top-0 z-50">
-      <TopBar />
+      <TopBar
+        locale={locale}
+        languageSwitcherLabel={a11y.languageSwitcher}
+      />
 
       <div className="border-b border-rose-100 bg-cream/95 backdrop-blur-sm">
         <div className="container-page flex h-20 items-center justify-between gap-6 lg:h-24">
-          <Logo />
+          <Logo
+            href={localePath(locale, "home")}
+            label={a11y.homeLink}
+            subline={logoSubline}
+          />
 
           <div className="flex items-center gap-4">
             <a
@@ -51,37 +102,30 @@ export function Navbar() {
               </span>
             </a>
 
-            <nav aria-label="Ana menü" className="hidden lg:block">
+            <nav aria-label={a11y.mainMenu} className="hidden lg:block">
               <ul className="flex items-center gap-1">
-                {navigation.map((item) => {
-                  const active =
-                    item.href === "/"
-                      ? pathname === "/"
-                      : pathname.startsWith(item.href);
-
-                  return (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        aria-current={active ? "page" : undefined}
+                {items.map((item) => (
+                  <li key={item.key}>
+                    <Link
+                      href={item.href}
+                      aria-current={item.active ? "page" : undefined}
+                      className={cn(
+                        "relative block px-4 py-2 text-sm font-medium tracking-wide transition-colors",
+                        item.active
+                          ? "text-rose-600"
+                          : "text-ink hover:text-rose-600",
+                      )}
+                    >
+                      {item.label}
+                      <span
                         className={cn(
-                          "relative block px-4 py-2 text-sm font-medium tracking-wide transition-colors",
-                          active
-                            ? "text-rose-600"
-                            : "text-ink hover:text-rose-600",
+                          "absolute inset-x-4 -bottom-0.5 h-px origin-center bg-rose-400 transition-transform duration-200",
+                          item.active ? "scale-x-100" : "scale-x-0",
                         )}
-                      >
-                        {item.label}
-                        <span
-                          className={cn(
-                            "absolute inset-x-4 -bottom-0.5 h-px origin-center bg-rose-400 transition-transform duration-200",
-                            active ? "scale-x-100" : "scale-x-0",
-                          )}
-                        />
-                      </Link>
-                    </li>
-                  );
-                })}
+                      />
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </nav>
 
@@ -90,7 +134,7 @@ export function Navbar() {
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
               aria-controls="mobil-menu"
-              aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
+              aria-label={open ? a11y.closeMenu : a11y.openMenu}
               className="flex size-11 items-center justify-center rounded-full border border-ink/10 text-ink transition-colors hover:border-rose-300 hover:text-rose-600 lg:hidden"
             >
               {open ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -101,22 +145,36 @@ export function Navbar() {
 
       <MobileMenu
         open={open}
-        pathname={pathname}
-        onNavigate={() => setOpen(false)}
+        items={items}
+        locale={locale}
+        a11y={a11y}
+        languageLabel={languageLabel}
       />
     </header>
   );
 }
 
-/** Telefon, adres ve sosyal medya bağlantılarını taşıyan ince üst şerit. */
-function TopBar() {
+/** Ana sayfa yalnızca tam eşleşmede, diğerleri alt yollarda da aktiftir. */
+function isActive(key: PageKey, rest: string) {
+  const path = localePath("tr", key);
+  return key === "home" ? rest === "/" : rest.startsWith(path);
+}
+
+/** Telefon, adres, sosyal medya ve dil seçimini taşıyan ince üst şerit. */
+function TopBar({
+  locale,
+  languageSwitcherLabel,
+}: {
+  locale: Locale;
+  languageSwitcherLabel: string;
+}) {
   return (
     <div className="hidden border-b border-rose-100/70 bg-cream-deep md:block">
-      <div className="container-page flex h-11 items-center justify-between text-xs text-ink-soft">
-        <div className="flex items-center gap-6">
+      <div className="container-page flex h-12 items-center justify-between gap-4 text-xs text-ink-soft">
+        <div className="flex min-w-0 items-center gap-6">
           <a
             href={contact.phoneHref}
-            className="flex items-center gap-2 transition-colors hover:text-rose-600"
+            className="flex shrink-0 items-center gap-2 transition-colors hover:text-rose-600"
           >
             <Phone className="size-3.5 text-rose-500" />
             <span className="font-medium">{contact.phone}</span>
@@ -125,20 +183,21 @@ function TopBar() {
             href={contact.mapsHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 transition-colors hover:text-rose-600"
+            className="flex min-w-0 items-center gap-2 transition-colors hover:text-rose-600"
           >
-            <MapPin className="size-3.5 text-rose-500" />
-            <span>{contact.address}</span>
+            <MapPin className="size-3.5 shrink-0 text-rose-500" />
+            <span className="truncate">{contact.address}</span>
           </a>
         </div>
 
-        <div className="flex items-center gap-1">
-          <SocialLink href={social.facebook} label="Facebook">
-            <FacebookIcon className="size-3.5" />
-          </SocialLink>
+        <div className="flex shrink-0 items-center gap-3">
           <SocialLink href={social.instagram} label="Instagram">
             <InstagramIcon className="size-3.5" />
           </SocialLink>
+
+          <span className="h-4 w-px bg-rose-200" />
+
+          <LanguageSwitcher locale={locale} label={languageSwitcherLabel} />
         </div>
       </div>
     </div>
@@ -169,13 +228,16 @@ function SocialLink({
 
 function MobileMenu({
   open,
-  pathname,
-  onNavigate,
+  items,
+  locale,
+  a11y,
+  languageLabel,
 }: {
   open: boolean;
-  pathname: string;
-  /** Bir bağlantıya tıklanınca menüyü kapatır. */
-  onNavigate: () => void;
+  items: { key: PageKey; label: string; href: string; active: boolean }[];
+  locale: Locale;
+  a11y: Dictionary["a11y"];
+  languageLabel: string;
 }) {
   return (
     <div
@@ -183,31 +245,33 @@ function MobileMenu({
       hidden={!open}
       className="border-b border-rose-100 bg-cream shadow-card lg:hidden"
     >
-      <nav aria-label="Mobil menü" className="container-page py-4">
+      <nav aria-label={a11y.mobileMenu} className="container-page py-4">
         <ul className="flex flex-col">
-          {navigation.map((item) => {
-            const active =
-              item.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(item.href);
-
-            return (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={onNavigate}
-                  aria-current={active ? "page" : undefined}
-                  className={cn(
-                    "block border-b border-rose-100/70 py-3.5 text-base font-medium transition-colors",
-                    active ? "text-rose-600" : "text-ink hover:text-rose-600",
-                  )}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            );
-          })}
+          {items.map((item) => (
+            <li key={item.key}>
+              <Link
+                href={item.href}
+                aria-current={item.active ? "page" : undefined}
+                className={cn(
+                  "block border-b border-rose-100/70 py-3.5 text-base font-medium transition-colors",
+                  item.active ? "text-rose-600" : "text-ink hover:text-rose-600",
+                )}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
         </ul>
+
+        <div className="mt-5 flex items-center justify-between gap-4">
+          <span className="text-xs font-semibold uppercase tracking-widest text-ink-muted">
+            {languageLabel}
+          </span>
+          <LanguageSwitcherInline
+            locale={locale}
+            label={a11y.languageSwitcher}
+          />
+        </div>
 
         <div className="mt-5 flex flex-col gap-3">
           <a

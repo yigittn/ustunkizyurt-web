@@ -6,115 +6,80 @@ import {
   Bus,
   Cctv,
   Footprints,
+  HeartHandshake,
+  Home,
+  ShieldCheck,
   Shirt,
+  Sparkles,
   Users,
   WashingMachine,
   Wifi,
   type LucideIcon,
 } from "lucide-react";
 
-export type Feature = {
-  icon: LucideIcon;
-  label: string;
-  description: string;
-};
+import type { Dictionary } from "@/i18n";
 
-/** "İmkânlarımız" bölümündeki olanaklar. */
-export const features: Feature[] = [
-  {
-    icon: BedDouble,
-    label: "Tek, iki ve üç kişilik odalar",
-    description:
-      "Her odada kişiye özel dolap, çalışma masası ve rahat yatak; ihtiyacınıza göre oda seçeneği.",
-  },
-  {
-    icon: WashingMachine,
-    label: "Çamaşırhane",
-    description:
-      "Ücretsiz kullanabileceğiniz çamaşır makineleri ve kurutma alanı.",
-  },
-  {
-    icon: Armchair,
-    label: "Dinlenme alanları",
-    description:
-      "Ders arasında nefes alabileceğiniz, arkadaşlarınızla sohbet edebileceğiniz ortak salonlar.",
-  },
-  {
-    icon: Users,
-    label: "Ziyaretçi odası",
-    description:
-      "Ailenizi ve misafirlerinizi ağırlayabileceğiniz ayrı, ferah bir ziyaretçi salonu.",
-  },
-  {
-    icon: BookOpen,
-    label: "Etüt salonu",
-    description:
-      "Sınav dönemlerinde sessiz çalışabileceğiniz, 7/24 açık etüt salonu.",
-  },
-  {
-    icon: Shirt,
-    label: "Ütü alanı",
-    description: "Ütü ve ütü masasının hazır bulunduğu ortak kullanım alanı.",
-  },
-  {
-    icon: Cctv,
-    label: "7/24 kamera sistemi",
-    description:
-      "Ortak alanlarda kesintisiz kamera kaydı ve gece gündüz görevli personel.",
-  },
-  {
-    icon: Footprints,
-    label: "Üniversiteye 5 dk yürüme mesafesi",
-    description:
-      "Uludağ Üniversitesi Görükle Kampüsü'ne yürüyerek beş dakika.",
-  },
-  {
-    icon: Wifi,
-    label: "Sınırsız wifi",
-    description:
-      "Tüm odalarda ve ortak alanlarda kotasız, yüksek hızlı internet.",
-  },
-  {
-    icon: Bus,
-    label: "Şehre kolay ulaşım",
-    description:
-      "Metro ve otobüs duraklarına yakın konum; şehir merkezine rahat erişim.",
-  },
+/**
+ * Dile bağlı olmayan içerik yapısı: sıra, ikonlar ve renk tonları.
+ * Metinler `src/i18n/dictionaries` içinde, buradaki anahtarlarla eşleşir.
+ */
+
+export type FeatureId = keyof Dictionary["features"];
+
+/** "İmkânlarımız" bölümündeki sıra ve ikonlar. */
+export const featureOrder: FeatureId[] = [
+  "rooms",
+  "laundry",
+  "lounge",
+  "guestRoom",
+  "studyHall",
+  "ironing",
+  "cameras",
+  "walkingDistance",
+  "wifi",
+  "transport",
 ];
 
-export type ValueCard = {
-  title: string;
-  body: string;
+export const featureIcons: Record<FeatureId, LucideIcon> = {
+  rooms: BedDouble,
+  laundry: WashingMachine,
+  lounge: Armchair,
+  guestRoom: Users,
+  studyHall: BookOpen,
+  ironing: Shirt,
+  cameras: Cctv,
+  walkingDistance: Footprints,
+  wifi: Wifi,
+  transport: Bus,
 };
 
-export const vision: ValueCard = {
-  title: "Vizyonumuz",
-  body: "Öğrencilerimizin kendilerini güvende, huzurlu ve evlerinde hissedebilecekleri; sakinliği, güveni ve kaliteli yaşam anlayışını bir arada sunan seçkin bir yurt olmak.",
-};
+export type Tone = "rose" | "sage";
 
-export const mission: ValueCard = {
-  title: "Misyonumuz",
-  body: "Ailelerin gönül rahatlığıyla emanet ettiği her öğrenciye; güvenli bir barınma, düzenli bir çalışma ortamı ve samimi bir aile ortamı sunarak eğitim hayatlarına destek olmak.",
-};
+export type TrustId = keyof Dictionary["trust"];
 
-/** Ana sayfadaki güven şeridi. */
-export const trustPoints = [
-  {
-    icon: BadgeCheck,
-    tone: "sage",
-    title: "Bakanlık denetiminde",
-    text: "T.C. Gençlik ve Spor Bakanlığı ruhsatlı ve düzenli olarak denetlenen bir yurduz.",
-  },
-  {
-    icon: Cctv,
-    tone: "rose",
-    title: "7/24 güvenlik",
-    text: "Kartlı giriş, kamera sistemi ve gece gündüz görevli yurt personeli.",
-  },
-  {
-    icon: Footprints,
-    tone: "sage",
-    title: "Kampüse 5 dakika",
-    text: "Uludağ Üniversitesi Görükle Kampüsü'ne yürüme mesafesinde.",
-  },
-] as const;
+export const trustPoints: {
+  id: TrustId;
+  icon: LucideIcon;
+  tone: Tone;
+}[] = [
+  { id: "ministry", icon: BadgeCheck, tone: "sage" },
+  { id: "security", icon: Cctv, tone: "rose" },
+  { id: "campus", icon: Footprints, tone: "sage" },
+];
+
+export type PrincipleId = keyof Dictionary["about"]["principles"];
+
+export const principles: {
+  id: PrincipleId;
+  icon: LucideIcon;
+  tone: Tone;
+}[] = [
+  { id: "security", icon: ShieldCheck, tone: "sage" },
+  { id: "home", icon: Home, tone: "rose" },
+  { id: "communication", icon: HeartHandshake, tone: "rose" },
+  { id: "cleanliness", icon: Sparkles, tone: "sage" },
+];
+
+export type RoomId = keyof Dictionary["services"]["rooms"];
+
+export const roomOrder: RoomId[] = ["single", "double", "triple"];

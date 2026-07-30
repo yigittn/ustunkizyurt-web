@@ -7,8 +7,8 @@ type PhotoFrameProps = {
   src?: string;
   alt: string;
   className?: string;
-  /** Yer tutucuda gösterilecek kısa etiket */
-  caption?: string;
+  /** Yer tutucuda gösterilecek "Fotoğraf" / "Photo" etiketi */
+  photoLabel: string;
   priority?: boolean;
 };
 
@@ -20,7 +20,7 @@ export function PhotoFrame({
   src,
   alt,
   className,
-  caption,
+  photoLabel,
   priority,
 }: PhotoFrameProps) {
   return (
@@ -42,9 +42,9 @@ export function PhotoFrame({
       ) : (
         <div className="flex size-full flex-col items-center justify-center gap-2 bg-gradient-to-br from-rose-100 via-cream-deep to-rose-200 p-6 text-center">
           <span className="font-display text-xs uppercase tracking-[0.25em] text-rose-600">
-            Fotoğraf
+            {photoLabel}
           </span>
-          <span className="text-xs text-ink-muted">{caption ?? alt}</span>
+          <span className="text-xs text-ink-muted">{alt}</span>
         </div>
       )}
     </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { ArrowRight, Footprints, ShieldCheck, Sparkles } from "lucide-react";
 
 import { HouseHeart } from "@/components/brand/house-heart";
@@ -9,24 +10,38 @@ import { Button } from "@/components/ui/button";
 import { BlobDecor, LeafDecor } from "@/components/ui/leaf-decor";
 import { PhotoFrame } from "@/components/ui/photo-frame";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { getDictionary, isLocale, locales, type Dictionary } from "@/i18n";
+import { localePath, type Locale } from "@/i18n/config";
 import { trustPoints } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
-export default function HomePage() {
+export function generateStaticParams() {
+  return locales.map((lang) => ({ lang }));
+}
+
+export default async function HomePage({ params }: PageProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
+  const d = getDictionary(lang);
+
   return (
     <>
-      <Hero />
-      <TrustStrip />
-      <IntroSection />
-      <FeaturesSection />
-      <ValueCards />
-      <GalleryPreview />
-      <CtaSection />
+      <Hero locale={lang} d={d} />
+      <TrustStrip d={d} />
+      <IntroSection locale={lang} d={d} />
+      <FeaturesSection d={d} />
+      <ValueCards d={d} />
+      <GalleryPreview locale={lang} d={d} />
+      <CtaSection
+        title={d.cta.title}
+        text={d.cta.text}
+        whatsappLabel={d.cta.whatsapp}
+      />
     </>
   );
 }
 
-function Hero() {
+function Hero({ locale, d }: { locale: Locale; d: Dictionary }) {
   return (
     <section className="relative flex min-h-[calc(100svh-var(--header-h))] items-center overflow-hidden bg-cream">
       <BlobDecor className="absolute -right-40 -top-32 size-[36rem] text-rose-100" />
@@ -37,12 +52,14 @@ function Hero() {
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-sage-300 bg-sage-50 px-4 py-1.5 text-xs font-medium tracking-wide text-sage-700">
             <ShieldCheck className="size-3.5" />
-            T.C. Gençlik ve Spor Bakanlığı denetiminde
+            {d.common.ministryShort}
           </span>
 
           <h1 className="heading-display mt-6 text-4xl uppercase sm:text-5xl lg:text-6xl">
-            Görükle&apos;de
-            <span className="mt-2 block text-rose-600">ikinci yuvanız</span>
+            {d.home.heroTitleTop}
+            <span className="mt-2 block text-rose-600">
+              {d.home.heroTitleBottom}
+            </span>
           </h1>
 
           <div className="mt-7 flex items-center gap-3">
@@ -52,19 +69,20 @@ function Hero() {
           </div>
 
           <p className="mt-7 max-w-xl text-pretty text-base leading-relaxed text-ink-soft sm:text-lg">
-            Uludağ Üniversitesi&apos;ne beş dakika yürüme mesafesinde, güvenliği
-            ve huzuru bir arada sunan kız öğrenci yurdu. Ailenizin gönül
-            rahatlığıyla emanet edebileceği, sizin de kendinizi evinizde
-            hissedeceğiniz bir ortam.
+            {d.home.heroLead}
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Button href="/iletisim" size="lg">
-              Yerinizi ayırtın
+            <Button href={localePath(locale, "contact")} size="lg">
+              {d.home.heroCtaPrimary}
               <ArrowRight className="size-4" />
             </Button>
-            <Button href="/galeri" size="lg" variant="outline">
-              Yurdumuzu gezin
+            <Button
+              href={localePath(locale, "gallery")}
+              size="lg"
+              variant="outline"
+            >
+              {d.home.heroCtaSecondary}
             </Button>
           </div>
         </div>
@@ -72,19 +90,19 @@ function Hero() {
         <div className="relative">
           <div className="grid grid-cols-2 gap-4">
             <PhotoFrame
-              alt="Yurt binası dış görünüm"
-              caption="Yurt binası"
+              alt={d.photos.exterior}
+              photoLabel={d.common.photo}
               priority
               className="col-span-2 aspect-[16/9]"
             />
             <PhotoFrame
-              alt="Öğrenci odası"
-              caption="Odalarımız"
+              alt={d.photos.studentRoom}
+              photoLabel={d.common.photo}
               className="aspect-[4/3]"
             />
             <PhotoFrame
-              alt="Etüt salonu"
-              caption="Etüt salonu"
+              alt={d.photos.studyHall}
+              photoLabel={d.common.photo}
               className="aspect-[4/3]"
             />
           </div>
@@ -94,9 +112,11 @@ function Hero() {
               <Footprints className="size-5" />
             </span>
             <span className="flex flex-col leading-tight">
-              <span className="font-display text-xl text-ink">5 dakika</span>
+              <span className="font-display text-xl text-ink">
+                {d.home.minutesValue}
+              </span>
               <span className="text-xs text-ink-muted">
-                Üniversite kampüsüne
+                {d.home.minutesLabel}
               </span>
             </span>
           </div>
@@ -106,13 +126,13 @@ function Hero() {
   );
 }
 
-function TrustStrip() {
+function TrustStrip({ d }: { d: Dictionary }) {
   return (
     <section className="border-y border-rose-100 bg-surface">
       <div className="container-page grid divide-y divide-rose-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
         {trustPoints.map((point) => (
           <div
-            key={point.title}
+            key={point.id}
             className="flex flex-col items-center px-2 py-9 text-center sm:px-6"
           >
             <span
@@ -126,10 +146,10 @@ function TrustStrip() {
               <point.icon className="size-6" strokeWidth={1.5} />
             </span>
             <h2 className="mt-4 font-display text-lg tracking-wide text-ink">
-              {point.title}
+              {d.trust[point.id].title}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-              {point.text}
+              {d.trust[point.id].text}
             </p>
           </div>
         ))}
@@ -138,14 +158,14 @@ function TrustStrip() {
   );
 }
 
-function IntroSection() {
+function IntroSection({ locale, d }: { locale: Locale; d: Dictionary }) {
   return (
     <section className="relative overflow-hidden bg-cream py-20 lg:py-28">
       <div className="container-page relative grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="relative">
           <PhotoFrame
-            alt="Dinlenme salonu"
-            caption="Ortak dinlenme alanı"
+            alt={d.photos.lounge}
+            photoLabel={d.common.photo}
             className="aspect-[4/5]"
           />
           <LeafDecor
@@ -157,34 +177,26 @@ function IntroSection() {
         <div>
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-rose-600">
             <Sparkles className="size-3.5" />
-            Hoş geldiniz
+            {d.home.introEyebrow}
           </span>
 
           <h2 className="heading-display mt-5 text-3xl uppercase sm:text-4xl">
-            Sadece bir yurt değil, sıcak bir ev
+            {d.home.introTitle}
           </h2>
 
           <div className="mt-6 h-px w-24 bg-rose-300" />
 
           <div className="mt-7 space-y-5 text-base leading-relaxed text-ink-soft">
-            <p>
-              Üstün Kız Öğrenci Yurdu, Bursa Görükle&apos;de yıllardır
-              öğrencilerini ağırlıyor. Şehre yeni gelen bir öğrenci için evden
-              uzakta olmanın ne demek olduğunu biliyoruz; bu yüzden yurdumuzu
-              bir konaklama yeri gibi değil, bir yaşam alanı gibi kurguladık.
-            </p>
-            <p>
-              7/24 kamera kaydı ve her saat görevli
-              personelimizle güvenliğinizi; ferah odalarımız, etüt salonumuz ve
-              ortak alanlarımızla da konforunuzu güvence altına alıyoruz.
-            </p>
+            {d.home.introParagraphs.map((paragraph) => (
+              <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+            ))}
           </div>
 
           <Link
-            href="/hakkimizda"
+            href={localePath(locale, "about")}
             className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-rose-700 transition-colors hover:text-rose-500"
           >
-            Hakkımızda daha fazlası
+            {d.home.introLink}
             <ArrowRight className="size-4" />
           </Link>
         </div>
@@ -193,36 +205,40 @@ function IntroSection() {
   );
 }
 
-function GalleryPreview() {
+function GalleryPreview({ locale, d }: { locale: Locale; d: Dictionary }) {
   const shots = [
-    { alt: "Yurt girişi", caption: "Giriş" },
-    { alt: "İki kişilik oda", caption: "İki kişilik oda" },
-    { alt: "Çalışma alanı", caption: "Etüt salonu" },
-    { alt: "Ziyaretçi odası", caption: "Ziyaretçi odası" },
+    d.photos.entrance,
+    d.photos.doubleRoom,
+    d.photos.studyHall,
+    d.photos.guestRoom,
   ];
 
   return (
     <section className="bg-cream py-20 lg:py-28">
       <div className="container-page">
         <SectionHeading
-          title="Galeriden"
-          subtitle="Yurdumuzun odalarını ve ortak alanlarını yakından görün."
+          title={d.home.galleryTitle}
+          subtitle={d.home.gallerySubtitle}
         />
 
         <div className="mt-12 grid grid-cols-2 gap-4 lg:grid-cols-4">
-          {shots.map((shot) => (
+          {shots.map((alt) => (
             <PhotoFrame
-              key={shot.caption}
-              alt={shot.alt}
-              caption={shot.caption}
+              key={alt}
+              alt={alt}
+              photoLabel={d.common.photo}
               className="aspect-[4/5]"
             />
           ))}
         </div>
 
         <div className="mt-10 flex justify-center">
-          <Button href="/galeri" variant="outline" size="lg">
-            Tüm fotoğraflar
+          <Button
+            href={localePath(locale, "gallery")}
+            variant="outline"
+            size="lg"
+          >
+            {d.home.galleryButton}
             <ArrowRight className="size-4" />
           </Button>
         </div>

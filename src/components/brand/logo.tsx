@@ -80,16 +80,25 @@ const toneStyles: Record<
 export function Logo({
   className,
   tone = "dark",
+  href,
+  label,
+  subline,
 }: {
   className?: string;
   tone?: Tone;
+  /** Geçerli dilin ana sayfası */
+  href: string;
+  /** Ekran okuyucu etiketi */
+  label: string;
+  /** "Kız Öğrenci Yurdu" — dile göre değişir */
+  subline: string;
 }) {
   const t = toneStyles[tone];
 
   return (
     <Link
-      href="/"
-      aria-label="Üstün Kız Öğrenci Yurdu — ana sayfa"
+      href={href}
+      aria-label={label}
       className={cn(
         "group inline-flex flex-col items-center transition-opacity hover:opacity-85",
         className,
@@ -116,7 +125,7 @@ export function Logo({
           t.subline,
         )}
       >
-        Kız Öğrenci Yurdu
+        {subline}
       </span>
     </Link>
   );
@@ -129,12 +138,18 @@ export function Logo({
 export function LogoStacked({
   className,
   tone = "dark",
-  tagline = "Evinizden uzakta, evinizdeki huzur…",
-  href = "/",
+  tagline,
+  subline,
+  label,
+  href,
 }: {
   className?: string;
   tone?: Tone;
+  /** El yazısı slogan; boş verilirse gösterilmez. */
   tagline?: string;
+  /** "Kız Öğrenci Yurdu" — dile göre değişir */
+  subline: string;
+  label: string;
   /** Boş verilirse bağlantı değil, düz blok olarak render edilir. */
   href?: string | null;
 }) {
@@ -162,7 +177,7 @@ export function LogoStacked({
           t.subline,
         )}
       >
-        Kız Öğrenci Yurdu
+        {subline}
       </span>
 
       <span className="mt-4 flex w-full max-w-[15rem] items-center gap-2">
@@ -193,7 +208,7 @@ export function LogoStacked({
   return (
     <Link
       href={href}
-      aria-label="Üstün Kız Öğrenci Yurdu — ana sayfa"
+      aria-label={label}
       className={cn(wrapper, "transition-opacity hover:opacity-85")}
     >
       {content}

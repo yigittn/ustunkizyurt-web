@@ -2,9 +2,10 @@ import { HouseHeart } from "@/components/brand/house-heart";
 import { FeatureOval } from "@/components/ui/feature-oval";
 import { LeafDecor } from "@/components/ui/leaf-decor";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { features } from "@/lib/content";
+import type { Dictionary } from "@/i18n";
+import { featureIcons, featureOrder } from "@/lib/content";
 
-export function FeaturesSection() {
+export function FeaturesSection({ d }: { d: Dictionary }) {
   return (
     <section
       id="imkanlarimiz"
@@ -19,16 +20,16 @@ export function FeaturesSection() {
       <div className="container-page relative">
         <SectionHeading
           icon={<HouseHeart className="size-7" />}
-          title="İmkânlarımız"
-          subtitle="Konforunuz, güvenliğiniz ve huzurunuz için her şey düşünüldü."
+          title={d.featuresSection.title}
+          subtitle={d.featuresSection.subtitle}
         />
 
         <div className="mt-14 grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-5">
-          {features.map((feature) => (
+          {featureOrder.map((id) => (
             <FeatureOval
-              key={feature.label}
-              icon={feature.icon}
-              label={feature.label}
+              key={id}
+              icon={featureIcons[id]}
+              label={d.features[id].label}
             />
           ))}
         </div>

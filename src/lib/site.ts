@@ -1,15 +1,12 @@
 /**
- * Site geneli sabitler — iletişim bilgileri, navigasyon ve marka metinleri.
- * Tek kaynaktan yönetilir; bir yeri değişince tüm site güncellenir.
+ * Dile bağlı olmayan site sabitleri: iletişim bilgileri ve sosyal hesaplar.
+ * Metinler için `src/i18n/dictionaries` kullanılır.
  */
 
 export const site = {
+  /** Marka adı — çevrilmez, her dilde aynı. */
   name: "Üstün Kız Öğrenci Yurdu",
-  shortName: "Üstün Kız Yurdu",
   url: "https://ustunkizyurdu.com",
-  tagline: "Görükle'de güvenli, huzurlu ve sıcak bir yuva",
-  description:
-    "Bursa Görükle'de, Uludağ Üniversitesi'ne 5 dakika yürüme mesafesinde, T.C. Gençlik ve Spor Bakanlığı denetimindeki kız öğrenci yurdu. 7/24 güvenlik, konforlu odalar ve samimi bir ortam.",
 } as const;
 
 export const contact = {
@@ -22,23 +19,10 @@ export const contact = {
   addressShort: "Görükle, Nilüfer / Bursa",
   mapsHref:
     "https://www.google.com/maps/search/?api=1&query=G%C3%B6r%C3%BCkle+%C3%9C%C3%A7oluk+Cd.+No%3A39+16285+Nil%C3%BCfer+Bursa",
+  mapEmbedSrc:
+    "https://maps.google.com/maps?q=G%C3%B6r%C3%BCkle%20%C3%9C%C3%A7oluk%20Cd.%20No%3A39%2016285%20Nil%C3%BCfer%20Bursa&z=16&output=embed",
 } as const;
 
 export const social = {
-  facebook: "https://www.facebook.com/",
   instagram: "https://www.instagram.com/",
-  twitter: "https://x.com/",
 } as const;
-
-export type NavItem = {
-  label: string;
-  href: string;
-};
-
-export const navigation: NavItem[] = [
-  { label: "Ana Sayfa", href: "/" },
-  { label: "Hakkımızda", href: "/hakkimizda" },
-  { label: "Hizmetlerimiz", href: "/hizmetlerimiz" },
-  { label: "Galeri", href: "/galeri" },
-  { label: "İletişim", href: "/iletisim" },
-];
