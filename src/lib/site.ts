@@ -10,11 +10,23 @@ export const site = {
 } as const;
 
 export const contact = {
-  phone: "0 (537) 685 04 07",
-  phoneHref: "tel:+905376850407",
+  /**
+   * Site genelinde gösterilen ana numara. WhatsApp hattıyla aynıdır;
+   * kullanıcı ister arayabilir ister mesaj atabilir.
+   */
+  phone: "0533 579 99 25",
+  phoneHref: "tel:+905335799925",
+  /** Yalnızca footer'da yer alan ikinci hat. */
+  secondaryPhone: "0 (537) 685 04 07",
+  secondaryPhoneHref: "tel:+905376850407",
   whatsapp: "0533 579 99 25",
   whatsappHref: "https://wa.me/905335799925",
-  email: "info@ustunkizyurdu.com",
+  /**
+   * Tek iletişim adresi. Gmail kullanıcı adlarında Türkçe karakter
+   * bulunamadığı için "ö" yerine "o" yazılmıştır (Instagram hesabıyla
+   * da aynı: ustunkizogrenciyurdu).
+   */
+  email: "ustunkizogrenciyurdu@gmail.com",
   address: "Görükle, Üçoluk Cd. No:39, 16285 Nilüfer/Bursa",
   addressShort: "Görükle, Nilüfer / Bursa",
   mapsHref:
@@ -24,5 +36,5 @@ export const contact = {
 } as const;
 
 export const social = {
-  instagram: "https://www.instagram.com/",
+  instagram: "https://www.instagram.com/ustunkizogrenciyurdu/",
 } as const;
