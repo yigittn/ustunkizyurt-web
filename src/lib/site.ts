@@ -16,9 +16,6 @@ export const contact = {
    */
   phone: "0533 579 99 25",
   phoneHref: "tel:+905335799925",
-  /** Yalnızca footer'da yer alan ikinci hat. */
-  secondaryPhone: "0 (537) 685 04 07",
-  secondaryPhoneHref: "tel:+905376850407",
   whatsapp: "0533 579 99 25",
   whatsappHref: "https://wa.me/905335799925",
   /**

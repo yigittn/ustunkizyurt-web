@@ -85,14 +85,13 @@ export function Footer({ locale, d }: { locale: Locale; d: Dictionary }) {
                   {contact.address}
                 </a>
               </li>
-              {/* İkinci hat yalnızca burada gösterilir */}
               <li>
                 <a
-                  href={contact.secondaryPhoneHref}
+                  href={contact.phoneHref}
                   className="flex items-center gap-3 text-cream/70 transition-colors hover:text-rose-200"
                 >
                   <Phone className="size-4 shrink-0 text-rose-300" />
-                  {contact.secondaryPhone}
+                  {contact.phone}
                 </a>
               </li>
               <li>
