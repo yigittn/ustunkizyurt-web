@@ -35,6 +35,8 @@ export const en: Dictionary = {
     languageSwitcher: "Language selection",
     whatsappFab: "Message us on WhatsApp: {n}",
     mapTitle: "Location of Üstün Girls' Dormitory",
+    slideshow: "Photos of the dormitory",
+    goToSlide: "Go to photo {n}",
   },
 
   common: {

@@ -5,6 +5,7 @@ import { ArrowRight, Footprints, ShieldCheck, Sparkles } from "lucide-react";
 import { HouseHeart } from "@/components/brand/house-heart";
 import { CtaSection } from "@/components/sections/cta-section";
 import { FeaturesSection } from "@/components/sections/features-section";
+import { HeroSlideshow } from "@/components/sections/hero-slideshow";
 import { ValueCards } from "@/components/sections/value-cards";
 import { Button } from "@/components/ui/button";
 import { BlobDecor, LeafDecor } from "@/components/ui/leaf-decor";
@@ -48,31 +49,31 @@ function Hero({ locale, d }: { locale: Locale; d: Dictionary }) {
       <BlobDecor className="absolute -bottom-56 -left-56 size-[38rem] text-sage-100/60" />
       <LeafDecor className="absolute right-4 top-24 hidden h-80 w-72 text-sage-300/50 lg:block" />
 
-      <div className="container-page relative grid items-center gap-12 py-10 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:py-12">
+      <div className="container-page relative grid items-center gap-6 py-6 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:py-12">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-sage-300 bg-sage-50 px-4 py-1.5 text-xs font-medium tracking-wide text-sage-700">
             <ShieldCheck className="size-3.5" />
             {d.common.ministryShort}
           </span>
 
-          <h1 className="heading-display mt-6 text-4xl uppercase sm:text-5xl lg:text-6xl">
+          <h1 className="heading-display mt-4 text-[2rem] uppercase sm:mt-6 sm:text-5xl lg:text-6xl">
             {d.home.heroTitleTop}
             <span className="mt-2 block text-rose-600">
               {d.home.heroTitleBottom}
             </span>
           </h1>
 
-          <div className="mt-7 flex items-center gap-3">
+          <div className="mt-4 flex items-center gap-3 sm:mt-7">
             <span className="h-px w-20 bg-rose-300" />
             <HouseHeart className="size-5 text-rose-400" />
             <span className="h-px w-20 bg-rose-300" />
           </div>
 
-          <p className="mt-7 max-w-xl text-pretty text-base leading-relaxed text-ink-soft sm:text-lg">
+          <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-ink-soft sm:mt-7 sm:text-lg">
             {d.home.heroLead}
           </p>
 
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-6 flex flex-col gap-3 sm:mt-9 sm:flex-row">
             <Button href={localePath(locale, "contact")} size="lg">
               {d.home.heroCtaPrimary}
               <ArrowRight className="size-4" />
@@ -88,31 +89,24 @@ function Hero({ locale, d }: { locale: Locale; d: Dictionary }) {
         </div>
 
         <div className="relative">
-          <div className="grid grid-cols-2 gap-4">
-            <PhotoFrame
-              alt={d.photos.exterior}
-              photoLabel={d.common.photo}
-              priority
-              className="col-span-2 aspect-[16/9]"
-            />
-            <PhotoFrame
-              alt={d.photos.studentRoom}
-              photoLabel={d.common.photo}
-              className="aspect-[4/3]"
-            />
-            <PhotoFrame
-              alt={d.photos.studyHall}
-              photoLabel={d.common.photo}
-              className="aspect-[4/3]"
-            />
-          </div>
+          <HeroSlideshow
+            photos={d.photos}
+            photoLabel={d.common.photo}
+            slideshowLabel={d.a11y.slideshow}
+            goToSlideLabel={d.a11y.goToSlide}
+          />
 
-          <div className="absolute -bottom-6 -left-4 flex items-center gap-3 rounded-2xl bg-surface px-5 py-4 shadow-card sm:-left-8">
-            <span className="flex size-11 items-center justify-center rounded-full bg-rose-200 text-rose-700">
+          {/*
+            Mobilde slaytın altında ayrı bir satır olarak durur — fotoğrafı
+            ve slayt noktalarını kapatmasın diye. lg'den itibaren köşeye
+            oturan yüzen karta dönüşür.
+          */}
+          <div className="mt-5 inline-flex items-center gap-3 rounded-2xl bg-surface px-4 py-3 shadow-soft lg:absolute lg:-bottom-6 lg:-left-8 lg:z-10 lg:mt-0 lg:px-5 lg:py-4 lg:shadow-card">
+            <span className="flex size-10 items-center justify-center rounded-full bg-rose-200 text-rose-700 lg:size-11">
               <Footprints className="size-5" />
             </span>
-            <span className="flex flex-col leading-tight">
-              <span className="font-display text-xl text-ink">
+            <span className="flex items-baseline gap-1.5 lg:flex-col lg:items-start lg:gap-0 lg:leading-tight">
+              <span className="font-display text-lg text-ink lg:text-xl">
                 {d.home.minutesValue}
               </span>
               <span className="text-xs text-ink-muted">

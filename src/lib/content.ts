@@ -83,3 +83,23 @@ export const principles: {
 export type RoomId = keyof Dictionary["services"]["rooms"];
 
 export const roomOrder: RoomId[] = ["single", "double", "triple"];
+
+export type PhotoId = keyof Dictionary["photos"];
+
+/**
+ * Ana sayfadaki hero slaytı.
+ *
+ * Fotoğrafları eklemek için: dosyaları `public/hero/` altına koy ve
+ * ilgili kaydın `src` alanını doldur (ör. `src: "/hero/bina.jpg"`).
+ * `src` boş olduğu sürece aynı ölçüde yer tutucu gösterilir.
+ * Sıra buradaki sıradır; kayıt ekleyip çıkarmak yeterlidir.
+ *
+ * Görseller 4:3 oranında kırpılır — yatay çekilmiş fotoğraflar en iyi durur.
+ */
+export const heroSlides: { id: PhotoId; src?: string }[] = [
+  { id: "exterior" },
+  { id: "studentRoom" },
+  { id: "studyHall" },
+  { id: "lounge" },
+  { id: "entrance" },
+];

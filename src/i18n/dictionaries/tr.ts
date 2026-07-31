@@ -37,6 +37,9 @@ export const tr = {
     /** `{n}` telefon numarasıyla değiştirilir */
     whatsappFab: "WhatsApp ile yazın: {n}",
     mapTitle: "Üstün Kız Öğrenci Yurdu konumu",
+    slideshow: "Yurttan fotoğraflar",
+    /** `{n}` slayt sırasıyla değiştirilir */
+    goToSlide: "{n}. fotoğrafa git",
   },
 
   common: {
