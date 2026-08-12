@@ -21,12 +21,12 @@ export type GalleryItem = {
  * her kaydın `src` alanı doldurulur. Başlıklar sözlükten gelir.
  */
 export const galleryItems: GalleryItem[] = [
-  { id: "singleRoom", category: "rooms" },
-  { id: "doubleRoom", category: "rooms" },
-  { id: "tripleRoom", category: "rooms" },
-  { id: "deskArea", category: "rooms" },
-  { id: "wardrobes", category: "rooms" },
-  { id: "bathroom", category: "rooms" },
+  { id: "singleRoom", category: "rooms", src: "/test.jpeg" },
+  { id: "doubleRoom", category: "rooms", src: "/test.jpeg" },
+  { id: "tripleRoom", category: "rooms", src: "/test.jpeg" },
+  { id: "deskArea", category: "rooms", src: "/test.jpeg" },
+  { id: "wardrobes", category: "rooms", src: "/test.jpeg" },
+  { id: "bathroom", category: "rooms", src: "/test.jpeg" },
   { id: "studyHall", category: "common" },
   { id: "lounge", category: "common" },
   { id: "guestRoom", category: "common" },
