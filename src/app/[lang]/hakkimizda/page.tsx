@@ -8,7 +8,7 @@ import { LeafDecor } from "@/components/ui/leaf-decor";
 import { PhotoFrame } from "@/components/ui/photo-frame";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getDictionary, isLocale, locales } from "@/i18n";
-import { principles } from "@/lib/content";
+import { aboutPhoto, principles } from "@/lib/content";
 import { alternatesFor } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 
@@ -51,7 +51,8 @@ export default async function AboutPage({
         <div className="container-page grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="relative">
             <PhotoFrame
-              alt={d.photos.building}
+              src={aboutPhoto.src}
+              alt={d.photos[aboutPhoto.id]}
               photoLabel={d.common.photo}
               className="aspect-[4/5]"
             />

@@ -7,7 +7,7 @@ import { FeaturesSection } from "@/components/sections/features-section";
 import { PhotoFrame } from "@/components/ui/photo-frame";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getDictionary, isLocale, locales } from "@/i18n";
-import { featureIcons, featureOrder, roomOrder } from "@/lib/content";
+import { featureIcons, featureOrder, roomOrder, roomPhotos } from "@/lib/content";
 import { alternatesFor } from "@/lib/metadata";
 
 export function generateStaticParams() {
@@ -57,10 +57,13 @@ export default async function ServicesPage({
           <div className="mt-14 grid gap-8 lg:grid-cols-3">
             {roomOrder.map((id) => (
               <article key={id} className="flex flex-col">
+                {/* 4:5 dikey: oda fotoğraflarının çoğu dikey çekildi,
+                    ayrıca galerideki kadrajla aynı oran olsun diye */}
                 <PhotoFrame
+                  src={roomPhotos[id]}
                   alt={d.services.rooms[id].name}
                   photoLabel={d.common.photo}
-                  className="aspect-[4/3]"
+                  className="aspect-[4/5]"
                 />
                 <h3 className="heading-display mt-6 text-xl uppercase">
                   {d.services.rooms[id].name}

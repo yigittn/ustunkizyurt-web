@@ -84,22 +84,48 @@ export type RoomId = keyof Dictionary["services"]["rooms"];
 
 export const roomOrder: RoomId[] = ["single", "double", "triple"];
 
+/** Hizmetlerimiz sayfasındaki oda tipi kartları (4:5 dikey kırpılır). */
+export const roomPhotos: Record<RoomId, string | undefined> = {
+  single: "/photos/services1_singleroom.jpeg",
+  double: "/photos/services2_doubleroom.jpeg",
+  triple: "/photos/services3_tripleroom.jpeg",
+};
+
 export type PhotoId = keyof Dictionary["photos"];
 
 /**
  * Ana sayfadaki hero slaytı.
  *
- * Fotoğrafları eklemek için: dosyaları `public/hero/` altına koy ve
- * ilgili kaydın `src` alanını doldur (ör. `src: "/hero/bina.jpg"`).
- * `src` boş olduğu sürece aynı ölçüde yer tutucu gösterilir.
+ * `src` boş bırakılırsa aynı ölçüde yer tutucu gösterilir.
  * Sıra buradaki sıradır; kayıt ekleyip çıkarmak yeterlidir.
+ * `id`, fotoğrafın alt metnini sözlükten çeker.
  *
- * Görseller 4:3 oranında kırpılır — yatay çekilmiş fotoğraflar en iyi durur.
+ * Mobilde 16:10, masaüstünde 4:3 kırpılır — hepsi yatay fotoğraf olmalı.
  */
 export const heroSlides: { id: PhotoId; src?: string }[] = [
-  { id: "exterior" },
-  { id: "studentRoom" },
-  { id: "studyHall" },
-  { id: "lounge" },
-  { id: "entrance" },
+  { id: "sittingArea", src: "/photos/slide1.jpeg" },
+  { id: "lounge", src: "/photos/rest_room.jpeg" },
+  { id: "studentRoom", src: "/photos/single_room.jpeg" },
+  { id: "doubleRoom", src: "/photos/double_room.jpeg" },
+  { id: "workArea", src: "/photos/double_room_inventory.jpeg" },
 ];
+
+/**
+ * Ana sayfadaki tekil fotoğraflar (hepsi 4:5 dikey kırpılır).
+ * `intro` = "Sadece bir yurt değil" bölümü, `preview` = galeri önizleme.
+ */
+export const homePhotos: {
+  intro: { id: PhotoId; src?: string };
+  preview: { id: PhotoId; src?: string }[];
+} = {
+  intro: { id: "guestRoom", src: "/photos/visitior_room.jpeg" },
+  preview: [
+    { id: "studyHall", src: "/photos/study_room.jpeg" },
+    { id: "lounge", src: "/photos/rest_room.jpeg" },
+    { id: "studentRoom", src: "/photos/single_room.jpeg" },
+    { id: "doubleRoom", src: "/photos/double_room.jpeg" },
+  ],
+};
+
+/** Hakkımızda sayfasındaki bina fotoğrafı (4:5 dikey). Henüz çekilmedi. */
+export const aboutPhoto: { id: PhotoId; src?: string } = { id: "building" };

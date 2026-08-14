@@ -83,6 +83,7 @@ export const en: Dictionary = {
     rooms: "Our rooms",
     studyHall: "Study hall",
     lounge: "Shared lounge",
+    sittingArea: "Sitting area",
     entrance: "Entrance",
     doubleRoom: "Double room",
     guestRoom: "Guest room",

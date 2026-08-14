@@ -82,7 +82,10 @@ export function HeroSlideshow({
                 src={slide.src}
                 alt={photos[slide.id]}
                 photoLabel={photoLabel}
+                // İlk kare LCP olduğu için öncelikli; diğerleri saniyeler
+                // içinde gösterileceğinden lazy değil eager yüklenir.
                 priority={position === 0}
+                loading={position === 0 ? undefined : "eager"}
                 className="size-full rounded-3xl"
               />
             </div>

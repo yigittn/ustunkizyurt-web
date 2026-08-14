@@ -88,6 +88,7 @@ export const tr = {
     rooms: "Odalarımız",
     studyHall: "Etüt salonu",
     lounge: "Ortak dinlenme alanı",
+    sittingArea: "Oturma alanı",
     entrance: "Giriş",
     doubleRoom: "İki kişilik oda",
     guestRoom: "Ziyaretçi odası",

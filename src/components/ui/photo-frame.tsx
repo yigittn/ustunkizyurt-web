@@ -10,6 +10,12 @@ type PhotoFrameProps = {
   /** Yer tutucuda gösterilecek "Fotoğraf" / "Photo" etiketi */
   photoLabel: string;
   priority?: boolean;
+  /**
+   * Varsayılan `lazy`. Görsel ilk ekranda olup birazdan gösterilecekse
+   * (ör. slayttaki sonraki kareler) `eager` verilmelidir; aksi hâlde
+   * sıra ona geldiğinde kare bir an boş kalır.
+   */
+  loading?: "lazy" | "eager";
 };
 
 /**
@@ -22,6 +28,7 @@ export function PhotoFrame({
   className,
   photoLabel,
   priority,
+  loading,
 }: PhotoFrameProps) {
   return (
     <div
@@ -36,6 +43,7 @@ export function PhotoFrame({
           alt={alt}
           fill
           priority={priority}
+          loading={loading}
           sizes="(min-width: 1024px) 40vw, 100vw"
           className="object-cover"
         />

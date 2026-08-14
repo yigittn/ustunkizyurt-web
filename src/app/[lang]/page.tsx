@@ -13,7 +13,7 @@ import { PhotoFrame } from "@/components/ui/photo-frame";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getDictionary, isLocale, locales, type Dictionary } from "@/i18n";
 import { localePath, type Locale } from "@/i18n/config";
-import { trustPoints } from "@/lib/content";
+import { homePhotos, trustPoints } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 export function generateStaticParams() {
@@ -158,7 +158,8 @@ function IntroSection({ locale, d }: { locale: Locale; d: Dictionary }) {
       <div className="container-page relative grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="relative">
           <PhotoFrame
-            alt={d.photos.lounge}
+            src={homePhotos.intro.src}
+            alt={d.photos[homePhotos.intro.id]}
             photoLabel={d.common.photo}
             className="aspect-[4/5]"
           />
@@ -200,13 +201,6 @@ function IntroSection({ locale, d }: { locale: Locale; d: Dictionary }) {
 }
 
 function GalleryPreview({ locale, d }: { locale: Locale; d: Dictionary }) {
-  const shots = [
-    d.photos.entrance,
-    d.photos.doubleRoom,
-    d.photos.studyHall,
-    d.photos.guestRoom,
-  ];
-
   return (
     <section className="bg-cream py-20 lg:py-28">
       <div className="container-page">
@@ -216,10 +210,11 @@ function GalleryPreview({ locale, d }: { locale: Locale; d: Dictionary }) {
         />
 
         <div className="mt-12 grid grid-cols-2 gap-4 lg:grid-cols-4">
-          {shots.map((alt) => (
+          {homePhotos.preview.map((photo) => (
             <PhotoFrame
-              key={alt}
-              alt={alt}
+              key={photo.id}
+              src={photo.src}
+              alt={d.photos[photo.id]}
               photoLabel={d.common.photo}
               className="aspect-[4/5]"
             />
