@@ -274,7 +274,6 @@ export const en: Dictionary = {
       kitchen: "Kitchen",
       exterior: "Exterior view of the dormitory",
       entrance: "Dormitory entrance",
-      corridor: "Corridor",
       garden: "Garden",
     },
     ctaTitle: "Seeing it in person is best",

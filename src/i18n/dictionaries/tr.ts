@@ -278,7 +278,6 @@ export const tr = {
       kitchen: "Mutfak",
       exterior: "Yurt binası dış görünüm",
       entrance: "Yurt girişi",
-      corridor: "Koridor",
       garden: "Bahçe",
     },
     ctaTitle: "Yerinde görmek en iyisi",

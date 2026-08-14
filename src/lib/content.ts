@@ -120,12 +120,15 @@ export const homePhotos: {
 } = {
   intro: { id: "guestRoom", src: "/photos/visitior_room.jpeg" },
   preview: [
+    { id: "exterior", src: "/photos/building.jpeg" },
+    { id: "entrance", src: "/photos/building_entrance.jpeg" },
     { id: "studyHall", src: "/photos/study_room.jpeg" },
     { id: "lounge", src: "/photos/rest_room.jpeg" },
-    { id: "studentRoom", src: "/photos/single_room.jpeg" },
-    { id: "doubleRoom", src: "/photos/double_room.jpeg" },
   ],
 };
 
-/** Hakkımızda sayfasındaki bina fotoğrafı (4:5 dikey). Henüz çekilmedi. */
-export const aboutPhoto: { id: PhotoId; src?: string } = { id: "building" };
+/** Hakkımızda sayfasındaki fotoğraf (4:5 dikey). */
+export const aboutPhoto: { id: PhotoId; src?: string } = {
+  id: "entrance",
+  src: "/photos/building_entrance.jpeg",
+};

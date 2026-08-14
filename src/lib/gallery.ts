@@ -27,7 +27,7 @@ export const galleryItems: GalleryItem[] = [
   { id: "singleRoom", category: "rooms", src: "/photos/single_room.jpeg" },
   { id: "doubleRoom", category: "rooms", src: "/photos/double_room.jpeg" },
   { id: "tripleRoom", category: "rooms", src: "/photos/triple_room.jpeg" },
-  { id: "deskArea", category: "rooms" }, // eksik
+  { id: "deskArea", category: "rooms", src: "/photos/study_desk.jpeg" },
   {
     id: "wardrobes",
     category: "rooms",
@@ -38,10 +38,13 @@ export const galleryItems: GalleryItem[] = [
   { id: "lounge", category: "common", src: "/photos/rest_room.jpeg" },
   { id: "guestRoom", category: "common", src: "/photos/visitior_room.jpeg" },
   { id: "laundry", category: "common", src: "/photos/laundry.jpeg" },
-  { id: "ironing", category: "common" }, // eksik
+  { id: "ironing", category: "common", src: "/photos/utu_alani.jpeg" },
   { id: "kitchen", category: "common", src: "/photos/kitchen.jpeg" },
-  { id: "exterior", category: "building" }, // eksik
-  { id: "entrance", category: "building" }, // eksik
-  { id: "corridor", category: "building" }, // eksik
-  { id: "garden", category: "building" }, // eksik
+  { id: "exterior", category: "building", src: "/photos/building.jpeg" },
+  {
+    id: "entrance",
+    category: "building",
+    src: "/photos/building_entrance.jpeg",
+  },
+  { id: "garden", category: "building", src: "/photos/garden.jpeg" },
 ];
