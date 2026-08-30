@@ -48,6 +48,7 @@ export default async function GalleryPage({
             gallery={d.gallery}
             photoLabel={d.common.photo}
             categoriesLabel={d.a11y.galleryCategories}
+            a11y={d.a11y}
           />
         </div>
       </section>

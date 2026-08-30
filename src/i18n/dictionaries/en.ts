@@ -37,6 +37,11 @@ export const en: Dictionary = {
     mapTitle: "Location of Üstün Girls' Dormitory",
     slideshow: "Photos of the dormitory",
     goToSlide: "Go to photo {n}",
+    lightbox: "Photo viewer",
+    openPhoto: "{alt} — enlarge",
+    closePhoto: "Close",
+    prevPhoto: "Previous photo",
+    nextPhoto: "Next photo",
   },
 
   common: {

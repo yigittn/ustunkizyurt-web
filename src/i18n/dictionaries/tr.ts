@@ -40,6 +40,12 @@ export const tr = {
     slideshow: "Yurttan fotoğraflar",
     /** `{n}` slayt sırasıyla değiştirilir */
     goToSlide: "{n}. fotoğrafa git",
+    lightbox: "Fotoğraf görüntüleyici",
+    /** `{alt}` fotoğrafın adıyla değiştirilir */
+    openPhoto: "{alt} — büyüt",
+    closePhoto: "Kapat",
+    prevPhoto: "Önceki fotoğraf",
+    nextPhoto: "Sonraki fotoğraf",
   },
 
   common: {
