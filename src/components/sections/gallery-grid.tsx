@@ -36,8 +36,13 @@ export function GalleryGrid({
 
   return (
     <div>
+      {/*
+        Sekme (tab) rolü yerine basılı-durum düğmeleri: gerçek sekme
+        yapısı ayrı bir tabpanel ve ok tuşu gezinmesi gerektirir; burada
+        yapılan iş bir filtre, ekran okuyucuya da öyle bildirilmeli.
+      */}
       <div
-        role="tablist"
+        role="group"
         aria-label={categoriesLabel}
         className="flex flex-wrap justify-center gap-2"
       >
@@ -50,13 +55,12 @@ export function GalleryGrid({
             <button
               key={filter}
               type="button"
-              role="tab"
-              aria-selected={selected}
+              aria-pressed={selected}
               onClick={() => setActive(filter)}
               className={cn(
                 "rounded-full border px-5 py-2 text-sm font-medium transition-colors",
                 selected
-                  ? "border-rose-400 bg-rose-400 text-white"
+                  ? "border-rose-400 bg-rose-400 text-ink"
                   : "border-ink/12 text-ink-soft hover:border-rose-300 hover:text-rose-700",
               )}
             >

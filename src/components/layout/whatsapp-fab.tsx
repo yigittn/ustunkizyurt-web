@@ -10,7 +10,9 @@ export function WhatsAppFab({ label }: { label: string }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={fill(label, { n: contact.whatsapp })}
-      className="fixed bottom-5 right-5 z-40 flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-card transition-transform hover:scale-105 active:scale-95"
+      // Koyu yeşil: açık tonda beyaz ikon 1.98:1 ile ayırt edilemiyordu
+      // (ikonlar için eşik 3:1), bu tonda 5.2:1.
+      className="fixed bottom-5 right-5 z-40 flex size-14 items-center justify-center rounded-full bg-[#0F7A6C] text-white shadow-card transition-transform hover:scale-105 active:scale-95"
     >
       <WhatsAppIcon className="size-7" />
     </a>

@@ -7,6 +7,8 @@ export const site = {
   /** Marka adı — çevrilmez, her dilde aynı. */
   name: "Üstün Kız Öğrenci Yurdu",
   url: "https://ustunkizyurdu.com",
+  /** Link paylaşımlarında (WhatsApp, Instagram, Facebook) görünen kare. */
+  ogImage: "/photos/slide1.jpeg",
 } as const;
 
 export const contact = {

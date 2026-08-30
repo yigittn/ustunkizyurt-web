@@ -243,7 +243,9 @@ function MobileMenu({
     <div
       id="mobil-menu"
       hidden={!open}
-      className="border-b border-rose-100 bg-cream shadow-card lg:hidden"
+      // Menü açıkken body kilitleniyor; yatay çevrilmiş telefonda menü
+      // ekrandan taşarsa alt butonlara ulaşılamıyordu — kendi içinde kaysın.
+      className="max-h-[calc(100svh-var(--header-h))] overflow-y-auto overscroll-contain border-b border-rose-100 bg-cream shadow-card lg:hidden"
     >
       <nav aria-label={a11y.mobileMenu} className="container-page py-4">
         <ul className="flex flex-col">
@@ -278,7 +280,9 @@ function MobileMenu({
             href={contact.whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white"
+            // WhatsApp'ın koyu yeşili: açık #25D366 üzerinde beyaz yazı
+            // 1.98:1 ile okunmuyordu, bu tonda 5.2:1.
+            className="flex items-center justify-center gap-2 rounded-full bg-[#0F7A6C] px-5 py-3 text-sm font-semibold text-white"
           >
             <WhatsAppIcon className="size-5" />
             Whatsapp: {contact.whatsapp}

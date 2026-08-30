@@ -59,6 +59,22 @@ export async function generateMetadata({
       siteName: d.common.brandName,
       title: d.meta.title,
       description: d.meta.description,
+      // WhatsApp/Instagram/Facebook önizlemesinde görünen kare.
+      // 1672x941 (~16:9), platformların beklediği 1.91:1'e çok yakın.
+      images: [
+        {
+          url: site.ogImage,
+          width: 1672,
+          height: 941,
+          alt: d.photos.sittingArea,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: d.meta.title,
+      description: d.meta.description,
+      images: [site.ogImage],
     },
     // `robots` bilerek belirtilmiyor: yokluğu zaten "indeksle" demek ve
     // 404 sayfasında Next'in eklediği noindex ile çakışmasını önlüyor.

@@ -34,7 +34,9 @@
   /* Lacivert metin */
   --color-ink: #1b2b44;
   --color-ink-soft: #445570;
-  --color-ink-muted: #7a8899;
+  /* Okunurluk için koyulaştırıldı: eski #7a8899 krem zeminde 3.4:1 ile
+     WCAG AA eşiğinin (4.5:1) altında kalıyordu. */
+  --color-ink-muted: #5f6e80;
 
   /* Tipografi */
   --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
