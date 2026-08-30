@@ -16,6 +16,12 @@ type PhotoFrameProps = {
    * sıra ona geldiğinde kare bir an boş kalır.
    */
   loading?: "lazy" | "eager";
+  /**
+   * Karenin ekrandaki genişliği. Tarayıcı indireceği görsel boyutunu
+   * buna göre seçer; olduğundan geniş verilirse gereksiz büyük dosya
+   * iner. Varsayılan, hero gibi yarım genişlikteki kareler içindir.
+   */
+  sizes?: string;
 };
 
 /**
@@ -29,6 +35,7 @@ export function PhotoFrame({
   photoLabel,
   priority,
   loading,
+  sizes = "(min-width: 1024px) 40vw, 100vw",
 }: PhotoFrameProps) {
   return (
     <div
@@ -44,7 +51,7 @@ export function PhotoFrame({
           fill
           priority={priority}
           loading={loading}
-          sizes="(min-width: 1024px) 40vw, 100vw"
+          sizes={sizes}
           className="object-cover"
         />
       ) : (

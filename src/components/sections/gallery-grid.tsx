@@ -73,6 +73,8 @@ export function GalleryGrid({
             src={item.src}
             alt={gallery.items[item.id]}
             photoLabel={photoLabel}
+            // lg'de 4 sütun, altında 2 sütun
+            sizes="(min-width: 1024px) 23vw, 48vw"
             className="aspect-[4/5]"
           />
         ))}

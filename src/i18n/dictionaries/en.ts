@@ -281,6 +281,14 @@ export const en: Dictionary = {
       "Photographs give you an idea, but a visit is far better. Get in touch to arrange one.",
   },
 
+  notFound: {
+    code: "404",
+    title: "Page not found",
+    text: "The page you are looking for may have moved, been renamed, or never existed.",
+    button: "Back to home",
+    contactLink: "Get in touch",
+  },
+
   contact: {
     title: "Contact",
     description:

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Sekme simgesi: sitedeki çatı + pencere marka işareti.
+       Küçük boyutta okunsun diye lacivert zemin üzerine kalın çizgi. -->
+  <rect width="64" height="64" rx="14" fill="#1B2B44" />
+  <path
+    d="M14 45 L32 20 L50 45"
+    fill="none"
+    stroke="#FDF8F4"
+    stroke-width="5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <g fill="#E5847A">
+    <rect x="26.75" y="28.5" width="4.5" height="4.5" rx="1" />
+    <rect x="32.75" y="28.5" width="4.5" height="4.5" rx="1" />
+    <rect x="26.75" y="34.5" width="4.5" height="4.5" rx="1" />
+    <rect x="32.75" y="34.5" width="4.5" height="4.5" rx="1" />
+  </g>
+</svg>

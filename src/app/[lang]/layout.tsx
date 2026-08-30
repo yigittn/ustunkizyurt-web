@@ -60,7 +60,8 @@ export async function generateMetadata({
       title: d.meta.title,
       description: d.meta.description,
     },
-    robots: { index: true, follow: true },
+    // `robots` bilerek belirtilmiyor: yokluğu zaten "indeksle" demek ve
+    // 404 sayfasında Next'in eklediği noindex ile çakışmasını önlüyor.
   };
 }
 

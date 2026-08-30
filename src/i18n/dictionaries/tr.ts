@@ -285,6 +285,14 @@ export const tr = {
       "Fotoğraflar bir fikir verir ama yurdumuzu gezmek çok daha iyisidir. Randevu için bize ulaşın.",
   },
 
+  notFound: {
+    code: "404",
+    title: "Sayfa bulunamadı",
+    text: "Aradığınız sayfa taşınmış, adı değişmiş ya da hiç var olmamış olabilir.",
+    button: "Ana sayfaya dön",
+    contactLink: "Bize ulaşın",
+  },
+
   contact: {
     title: "İletişim",
     description:

@@ -63,6 +63,8 @@ export default async function ServicesPage({
                   src={roomPhotos[id]}
                   alt={d.services.rooms[id].name}
                   photoLabel={d.common.photo}
+                  // lg'de 3 sütun, altında tek sütun
+                  sizes="(min-width: 1024px) 31vw, 100vw"
                   className="aspect-[4/5]"
                 />
                 <h3 className="heading-display mt-6 text-xl uppercase">

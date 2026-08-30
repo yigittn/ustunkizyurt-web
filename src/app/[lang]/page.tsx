@@ -216,6 +216,8 @@ function GalleryPreview({ locale, d }: { locale: Locale; d: Dictionary }) {
               src={photo.src}
               alt={d.photos[photo.id]}
               photoLabel={d.common.photo}
+              // lg'de 4 sütun, altında 2 sütun
+              sizes="(min-width: 1024px) 23vw, 48vw"
               className="aspect-[4/5]"
             />
           ))}
