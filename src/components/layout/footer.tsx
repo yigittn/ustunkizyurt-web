@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
+import { Mail, MapPin, Phone, PhoneCall, ShieldCheck } from "lucide-react";
 
 import { LogoStacked } from "@/components/brand/logo";
 import { InstagramIcon } from "@/components/brand/social-icons";
@@ -92,6 +92,15 @@ export function Footer({ locale, d }: { locale: Locale; d: Dictionary }) {
                 >
                   <Phone className="size-4 shrink-0 text-rose-300" />
                   {contact.phone}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={contact.landlineHref}
+                  className="flex items-center gap-3 text-cream/70 transition-colors hover:text-rose-200"
+                >
+                  <PhoneCall className="size-4 shrink-0 text-rose-300" />
+                  {contact.landline}
                 </a>
               </li>
               <li>

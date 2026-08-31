@@ -6,7 +6,7 @@ export const tr = {
   meta: {
     title: "Üstün Kız Öğrenci Yurdu | Bursa Görükle Kız Yurdu",
     description:
-      "Bursa Görükle'de, Uludağ Üniversitesi'ne 5 dakika yürüme mesafesinde, T.C. Gençlik ve Spor Bakanlığı denetimindeki kız öğrenci yurdu. 7/24 güvenlik, konforlu odalar ve samimi bir ortam.",
+      "Bursa Görükle'de, Uludağ Üniversitesi'ne toplu taşımayla 5 dakika mesafede, T.C. Gençlik ve Spor Bakanlığı denetimindeki kız öğrenci yurdu. 7/24 güvenlik, konforlu odalar ve samimi bir ortam.",
     keywords: [
       "Bursa kız yurdu",
       "Görükle kız yurdu",
@@ -71,7 +71,7 @@ export const tr = {
     heroTitleTop: "Görükle'de",
     heroTitleBottom: "ikinci yuvanız",
     heroLead:
-      "Uludağ Üniversitesi'ne beş dakika yürüme mesafesinde, güvenliği ve huzuru bir arada sunan kız öğrenci yurdu. Ailenizin gönül rahatlığıyla emanet edebileceği, sizin de kendinizi evinizde hissedeceğiniz bir ortam.",
+      "Uludağ Üniversitesi'ne toplu taşımayla beş dakika mesafede, güvenliği ve huzuru bir arada sunan kız öğrenci yurdu. Ailenizin gönül rahatlığıyla emanet edebileceği, sizin de kendinizi evinizde hissedeceğiniz bir ortam.",
     heroCtaPrimary: "Yerinizi ayırtın",
     heroCtaSecondary: "Yurdumuzu gezin",
     minutesValue: "5 dakika",
@@ -110,11 +110,11 @@ export const tr = {
     },
     security: {
       title: "7/24 güvenlik",
-      text: "Kartlı giriş, kamera sistemi ve gece gündüz görevli yurt personeli.",
+      text: "Kamera sistemi ve gece gündüz görevli yurt personeli.",
     },
     campus: {
       title: "Kampüse 5 dakika",
-      text: "Uludağ Üniversitesi Görükle Kampüsü'ne yürüme mesafesinde.",
+      text: "Uludağ Üniversitesi Görükle Kampüsü'ne toplu taşımayla beş dakika.",
     },
   },
 
@@ -159,9 +159,9 @@ export const tr = {
         "Ortak alanlarda kesintisiz kamera kaydı ve gece gündüz görevli personel.",
     },
     walkingDistance: {
-      label: "Üniversiteye 5 dk yürüme mesafesi",
+      label: "Üniversiteye toplu taşımayla 5 dakika",
       description:
-        "Uludağ Üniversitesi Görükle Kampüsü'ne yürüyerek beş dakika.",
+        "Uludağ Üniversitesi Görükle Kampüsü'ne toplu taşımayla beş dakika.",
     },
     wifi: {
       label: "Sınırsız wifi",
@@ -198,7 +198,7 @@ export const tr = {
       "Üstün Kız Öğrenci Yurdu, Bursa Görükle'de T.C. Gençlik ve Spor Bakanlığı denetiminde hizmet veren, güvenli ve huzurlu bir kız öğrenci yurdudur.",
     whoTitle: "Biz kimiz?",
     whoParagraphs: [
-      "Üstün Kız Öğrenci Yurdu, Bursa Nilüfer'in Görükle bölgesinde, Uludağ Üniversitesi kampüsüne yürüme mesafesinde yer alan özel bir kız öğrenci yurdudur. T.C. Gençlik ve Spor Bakanlığı ruhsatlı olarak faaliyet gösteriyor, düzenli olarak denetleniyoruz.",
+      "Üstün Kız Öğrenci Yurdu, Bursa Nilüfer'in Görükle bölgesinde, Uludağ Üniversitesi kampüsüne toplu taşımayla beş dakika mesafede yer alan özel bir kız öğrenci yurdudur. T.C. Gençlik ve Spor Bakanlığı ruhsatlı olarak faaliyet gösteriyor, düzenli olarak denetleniyoruz.",
       "Üniversite hayatı, çoğu öğrenci için evden ilk kez ayrılmak demek. Bu geçişin ne kadar zor olabileceğini biliyoruz. Bu yüzden yurdumuzu yalnızca kalınacak bir yer olarak değil; çalışabileceğiniz, dinlenebileceğiniz ve kendinizi güvende hissedebileceğiniz bir yaşam alanı olarak tasarladık.",
       "Odalarımız tek, iki ve üç kişilik seçeneklerle sunulur. Etüt salonumuz sınav dönemlerinde 7/24 açıktır, ortak alanlarımız günlük olarak temizlenir ve ziyaretçilerinizi ağırlayabileceğiniz ayrı bir salonumuz bulunur.",
     ],
@@ -207,7 +207,7 @@ export const tr = {
     principles: {
       security: {
         title: "Güven önce gelir",
-        text: "Kartlı giriş, 7/24 kamera kaydı ve her saat görevli personel. Ailelerin içi rahat olsun diye güvenlikten ödün vermiyoruz.",
+        text: "7/24 kamera kaydı ve her saat görevli personel. Ailelerin içi rahat olsun diye güvenlikten ödün vermiyoruz.",
       },
       home: {
         title: "Evinizdeki huzur",
@@ -312,7 +312,7 @@ export const tr = {
       "Yurdumuzu her gün 09:00 – 20:00 arasında gezebilirsiniz. Gelmeden önce arayarak randevu almanızı öneririz.",
     mapTitle: "Bizi bulun",
     mapSubtitle:
-      "Görükle merkezde, Uludağ Üniversitesi kampüsüne yürüme mesafesinde.",
+      "Görükle merkezde, Uludağ Üniversitesi kampüsüne toplu taşımayla beş dakika.",
   },
 };
 

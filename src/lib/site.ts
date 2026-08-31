@@ -18,6 +18,9 @@ export const contact = {
    */
   phone: "0533 579 99 25",
   phoneHref: "tel:+905335799925",
+  /** Sabit hat — footer'da cep numarasının altında gösterilir. */
+  landline: "0224 483 50 37",
+  landlineHref: "tel:+902244835037",
   whatsapp: "0533 579 99 25",
   whatsappHref: "https://wa.me/905335799925",
   /**

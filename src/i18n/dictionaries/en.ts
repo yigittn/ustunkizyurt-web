@@ -5,7 +5,7 @@ export const en: Dictionary = {
   meta: {
     title: "Üstün Girls' Dormitory | Student Housing in Görükle, Bursa",
     description:
-      "A girls' student dormitory in Görükle, Bursa — a five-minute walk from Uludağ University and licensed by the Turkish Ministry of Youth and Sports. 24/7 security, comfortable rooms and a warm, friendly atmosphere.",
+      "A girls' student dormitory in Görükle, Bursa — five minutes from Uludağ University by public transport and licensed by the Turkish Ministry of Youth and Sports. 24/7 security, comfortable rooms and a warm, friendly atmosphere.",
     keywords: [
       "girls dormitory Bursa",
       "student housing Görükle",
@@ -66,7 +66,7 @@ export const en: Dictionary = {
     heroTitleTop: "Your second home",
     heroTitleBottom: "in Görükle",
     heroLead:
-      "A girls' dormitory just five minutes' walk from Uludağ University, where safety and peace of mind come together. A place your family can entrust you to with confidence — and where you will feel at home.",
+      "A girls' dormitory just five minutes from Uludağ University by public transport, where safety and peace of mind come together. A place your family can entrust you to with confidence — and where you will feel at home.",
     heroCtaPrimary: "Reserve your place",
     heroCtaSecondary: "Take a look around",
     minutesValue: "5 minutes",
@@ -104,11 +104,11 @@ export const en: Dictionary = {
     },
     security: {
       title: "24/7 security",
-      text: "Card-access entry, camera system and dormitory staff on duty day and night.",
+      text: "Camera system and dormitory staff on duty day and night.",
     },
     campus: {
       title: "5 minutes to campus",
-      text: "Within walking distance of Uludağ University's Görükle campus.",
+      text: "Five minutes from Uludağ University's Görükle campus by public transport.",
     },
   },
 
@@ -153,9 +153,9 @@ export const en: Dictionary = {
         "Continuous camera recording in common areas and staff on duty day and night.",
     },
     walkingDistance: {
-      label: "5 min walk to the university",
+      label: "5 min to the university by public transport",
       description:
-        "A five-minute walk to Uludağ University's Görükle campus.",
+        "Five minutes to Uludağ University's Görükle campus by public transport.",
     },
     wifi: {
       label: "Unlimited wifi",
@@ -192,7 +192,7 @@ export const en: Dictionary = {
       "Üstün Girls' Dormitory is a safe and peaceful student residence in Görükle, Bursa, licensed by the Turkish Ministry of Youth and Sports.",
     whoTitle: "Who are we?",
     whoParagraphs: [
-      "Üstün Girls' Dormitory is a private student residence in the Görükle district of Nilüfer, Bursa, within walking distance of the Uludağ University campus. We operate under a licence from the Turkish Ministry of Youth and Sports and are inspected regularly.",
+      "Üstün Girls' Dormitory is a private student residence in the Görükle district of Nilüfer, Bursa, five minutes from the Uludağ University campus by public transport. We operate under a licence from the Turkish Ministry of Youth and Sports and are inspected regularly.",
       "For most students, university life means leaving home for the first time. We know how difficult that transition can be, which is why we designed our dormitory not merely as somewhere to sleep, but as a place where you can study, rest and feel safe.",
       "Rooms are available as single, double and triple options. Our study hall stays open 24/7 during exam periods, common areas are cleaned daily, and a separate lounge is available for receiving visitors.",
     ],
@@ -201,7 +201,7 @@ export const en: Dictionary = {
     principles: {
       security: {
         title: "Safety comes first",
-        text: "Card-access entry, 24/7 camera recording and staff on duty at every hour. We do not compromise on security, so that families can rest easy.",
+        text: "24/7 camera recording and staff on duty at every hour. We do not compromise on security, so that families can rest easy.",
       },
       home: {
         title: "The calm of home",
@@ -307,6 +307,6 @@ export const en: Dictionary = {
       "You are welcome to visit any day between 09:00 and 20:00. We recommend calling ahead to arrange an appointment.",
     mapTitle: "Find us",
     mapSubtitle:
-      "In central Görükle, within walking distance of the Uludağ University campus.",
+      "In central Görükle, five minutes from the Uludağ University campus by public transport.",
   },
 };

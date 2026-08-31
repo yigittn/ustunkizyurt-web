@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Footprints, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, BusFront, ShieldCheck, Sparkles } from "lucide-react";
 
 import { HouseHeart } from "@/components/brand/house-heart";
 import { CtaSection } from "@/components/sections/cta-section";
@@ -103,7 +103,7 @@ function Hero({ locale, d }: { locale: Locale; d: Dictionary }) {
           */}
           <div className="mt-5 inline-flex items-center gap-3 rounded-2xl bg-surface px-4 py-3 shadow-soft lg:absolute lg:-bottom-6 lg:-left-8 lg:z-10 lg:mt-0 lg:px-5 lg:py-4 lg:shadow-card">
             <span className="flex size-10 items-center justify-center rounded-full bg-rose-200 text-rose-700 lg:size-11">
-              <Footprints className="size-5" />
+              <BusFront className="size-5" />
             </span>
             <span className="flex items-baseline gap-1.5 lg:flex-col lg:items-start lg:gap-0 lg:leading-tight">
               <span className="font-display text-lg text-ink lg:text-xl">

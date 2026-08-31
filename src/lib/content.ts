@@ -4,8 +4,8 @@ import {
   BedDouble,
   BookOpen,
   Bus,
+  BusFront,
   Cctv,
-  Footprints,
   HeartHandshake,
   Home,
   ShieldCheck,
@@ -48,7 +48,7 @@ export const featureIcons: Record<FeatureId, LucideIcon> = {
   studyHall: BookOpen,
   ironing: Shirt,
   cameras: Cctv,
-  walkingDistance: Footprints,
+  walkingDistance: BusFront,
   wifi: Wifi,
   transport: Bus,
 };
@@ -64,7 +64,7 @@ export const trustPoints: {
 }[] = [
   { id: "ministry", icon: BadgeCheck, tone: "sage" },
   { id: "security", icon: Cctv, tone: "rose" },
-  { id: "campus", icon: Footprints, tone: "sage" },
+  { id: "campus", icon: BusFront, tone: "sage" },
 ];
 
 export type PrincipleId = keyof Dictionary["about"]["principles"];
